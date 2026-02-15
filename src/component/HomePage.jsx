@@ -1,6 +1,12 @@
 import "../css/HomePage.css";
-import HomePageLogo from '../assets/Home_Page_Logo.jpeg'
+import HomePageLogo from "../assets/Home_Page_Logo.jpeg";
+import { useNavigate } from "react-router-dom";
 function HomePage() {
+  const navigate = useNavigate();
+
+  function routeToSignup() {
+    navigate("/signup");
+  }
   return (
     <div className="homepage-wrapper">
       <div className="container-fluid">
@@ -27,7 +33,10 @@ function HomePage() {
 
             <div className="login-signup-button">
               <div className="button-group rounded-pill">
-                <button className="btn btn-primary custom-btn mb-3">
+                <button
+                  className="btn btn-primary custom-btn mb-3"
+                  onClick={routeToSignup}
+                >
                   Sign Up
                 </button>
               </div>
