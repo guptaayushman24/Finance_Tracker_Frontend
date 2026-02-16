@@ -13,14 +13,6 @@ function SignupComponent() {
     setAllExpense(allExpenseResponse.data);
     const fetchExpenses = async () => {
       try {
-        // Example dummy data (remove when using real API)
-        // const dataFromAPI = [
-        //   "Car Payment",
-        //   "Clothing",
-        //   "Entertainment",
-        //   "Emergency Fund",
-        //   "Groceries",
-        // ];
 
         setExpenses((await allExpenseResponse).data);
       } catch (error) {
@@ -44,6 +36,10 @@ function SignupComponent() {
     );
     setSelectedExpenses(modifiedExpense);
   };
+
+  // const saveUser = ()=>{
+
+  // }
 
   return (
     <div className="signup-wrapper">
@@ -103,7 +99,9 @@ function SignupComponent() {
             ))}
           </div>
 
-          <button className="btn btn-primary w-100 register-btn">
+          <button className="btn btn-primary w-100 register-btn"
+          onClick={saveUser()}
+          >
             Register User
           </button>
         </div>
