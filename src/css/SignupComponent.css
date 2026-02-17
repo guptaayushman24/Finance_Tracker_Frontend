@@ -101,6 +101,15 @@
   color: white;
   transition: 0.3s ease;
 }
+.nameerrorparent{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.nameerror{
+  color: red;
+  margin-left: 5px;
+}
 
 .register-btn:hover {
   transform: translateY(-2px);
