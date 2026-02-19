@@ -84,6 +84,11 @@
   font-weight: 600;
 }
 
+.error{
+  color: red;
+  margin-left: 5px;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .signin-card {
@@ -92,5 +97,8 @@
 
   .signin-title {
     font-size: 20px;
+  }
+  .error{
+
   }
 }
