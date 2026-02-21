@@ -96,7 +96,6 @@ function SignupComponent() {
       !errorPassword &&
       !errorEmailAddress
     ) {
-      console.log("Hello Axios");
       await axios
         .post("http://localhost:8080/auth/signup", {
           firstName: firstName,

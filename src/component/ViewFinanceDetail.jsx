@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 function ViewFinanceDetail(){
-   const emailAddress = useSelector((state)=>state.emailAddress.emailAddress);
+   const firstName = useSelector((state)=>state.profile.firstName);
+   const lastName = useSelector((state)=>state.profile.lastName);
   return(
     <div>
-      Welcome {emailAddress}
+      Welcome {firstName +" "+ lastName}
     </div>
   )
 }

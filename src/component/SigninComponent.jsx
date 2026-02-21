@@ -1,15 +1,22 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/SigninComponent.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setProfileEmailAddress } from "../feature/slice/Slice";
+import {
+  setFirstName,
+  setLastName,
+  setProfileEmailAddress,
+} from "../feature/slice/Slice";
+import axiosInstance from "../util/AxiosInstance";
 function SigninComponent() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   function routeToSignup() {
     navigate("/signup");
   }
-  const dispatch = useDispatch();
+  
   // State for storing the fields
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +35,7 @@ function SigninComponent() {
 
   const signIn = async () => {
     if (emailAddress.length >= 0 && !emailRegex.test(emailAddress)) {
-      console.log("Error")
+      console.log("Error");
       setErrorEmailAddress(true);
     } else {
       setErrorEmailAddress(false);
@@ -40,24 +47,47 @@ function SigninComponent() {
       SeterrorPassword(false);
     }
 
-    if (errorEmailAddress==false && errorPassword==false){
+    if (errorEmailAddress == false && errorPassword == false) {
       // If there is no error then signin the user
       SetLoading(true);
-      await axios.post("http://localhost:8080/auth/signin",{
-        email:emailAddress,
-        password:password
-      })
-      .then(function(response){
-        console.log(response.data);
-        if (response.status==200){
-          localStorage.setItem("token",response.data.jwt);
-          localStorage.setItem("id",response.data.id);
-
-          // Set the email address here and fetch in the /viewfinance compoenent
-         dispatch(setProfileEmailAddress(response.data.email));
-          navigate("/viewfinance")
+      
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/auth/signin",
+          {
+            email: emailAddress,
+            password: password,
+          },
+        );
+        if (response.status == 200) {
+          console.log("Response Status"+" "+response.status);
+          SetLoading(true);
+          console.log("Response is" + " " + response);
+          localStorage.setItem("token", response.data.jwt);
+          localStorage.setItem("id", response.data.id);
         }
-      })
+      } catch (error) {
+        console.error("Login error:", error.response?.data || error.message);
+      }
+
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axiosInstance.post(
+          "http://localhost:8080/auth/profile",
+          {
+            emailAddress: emailAddress,
+          },
+        )
+        if (response.status == 200) {
+          console.log("Status is"+" "+response.status)
+          console.log("Token is"+" "+token);
+          dispatch(setFirstName(response.data.firstName));
+          dispatch(setLastName(response.data.lastName));
+          navigate("/viewfinance");
+        }
+      } catch (error) {
+        console.error("Login error:", error.response?.data || error.message);
+      }
     }
   };
 
@@ -74,13 +104,9 @@ function SigninComponent() {
             className="form-input"
             onChange={(e) => setEmailAddress(e.target.value)}
           />
-          {
-            errorEmailAddress ? (
-              <div className="error">
-                *Enter valid Email Address
-              </div>
-            ):null
-          }
+          {errorEmailAddress ? (
+            <div className="error">*Enter valid Email Address</div>
+          ) : null}
         </div>
 
         <div className="form-group">
@@ -91,20 +117,16 @@ function SigninComponent() {
             className="form-input"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {
-            errorPassword ? (
-              <div className="error">
-                *Password should contain atleast one capital letter and atleast
-                one digit and atleast one special character and atleast length
-                should be 6
-              </div>
-            ):null
-          }
+          {errorPassword ? (
+            <div className="error">
+              *Password should contain atleast one capital letter and atleast
+              one digit and atleast one special character and atleast length
+              should be 6
+            </div>
+          ) : null}
         </div>
 
-        <button className="signin-btn" onClick={signIn}
-        disabled={loading}
-        >
+        <button className="signin-btn" onClick={signIn} disabled={loading}>
           Sign In
         </button>
 
