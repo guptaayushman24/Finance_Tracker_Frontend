@@ -7,6 +7,10 @@ function HomePage() {
   function routeToSignup() {
     navigate("/signup");
   }
+
+  function routeToSignin(){
+    navigate("/signin")
+  }
   return (
     <div className="homepage-wrapper">
       <div className="container-fluid">
@@ -42,7 +46,9 @@ function HomePage() {
               </div>
 
               <div className="button-group rounded-pill">
-                <button className="btn btn-primary custom-btn mb-3">
+                <button className="btn btn-primary custom-btn mb-3"
+                  onClick={routeToSignin}
+                >
                   Sign In
                 </button>
               </div>

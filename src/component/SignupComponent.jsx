@@ -21,7 +21,6 @@ function SignupComponent() {
 
   // State for the Signup Button
   const [loading, SetLoading] = useState(false);
-  const [signupButton, setSignupButton] = useState("Register User");
 
   // Regex
   const firstNameRegex = /^[A-Za-z]+$/;
@@ -67,25 +66,25 @@ function SignupComponent() {
 
   const saveUser = async () => {
     SetLoading(true);
-    if (firstName.length > 0 && !firstNameRegex.test(firstName)) {
+    if (firstName.length >= 0 && !firstNameRegex.test(firstName)) {
       SeterrorFirstName(true);
     } else {
       SeterrorFirstName(false);
     }
 
-    if (secondName.length > 0 && !secondNameRegex.test(secondName)) {
+    if (secondName.length >= 0 && !secondNameRegex.test(secondName)) {
       SeterrorSecondName(true);
     } else {
       SeterrorSecondName(false);
     }
 
-    if (emailAddress.length > 0 && !emailRegex.test(emailAddress)) {
+    if (emailAddress.length >= 0 && !emailRegex.test(emailAddress)) {
       setErrorEmailAddress(true);
     } else {
       setErrorEmailAddress(false);
     }
 
-    if (password.length > 0 && !passwordRegex.test(password)) {
+    if (password.length >= 0 && !passwordRegex.test(password)) {
       SeterrorPassword(true);
     } else {
       SeterrorPassword(false);
@@ -97,7 +96,6 @@ function SignupComponent() {
       !errorPassword &&
       !errorEmailAddress
     ) {
-      console.log("Hello Axios");
       await axios
         .post("http://localhost:8080/auth/signup", {
           firstName: firstName,
@@ -207,13 +205,6 @@ function SignupComponent() {
               </button>
             ))}
           </div>
-
-          {/* <button
-            className="btn btn-primary w-100 register-btn"
-            onClick={saveUser}
-          >
-            Register User
-          </button> */}
           <button
             className="btn btn-primary w-100 register-btn"
             onClick={saveUser}
