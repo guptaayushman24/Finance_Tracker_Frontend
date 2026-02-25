@@ -34,7 +34,13 @@ const OTPPage = () => {
       if (response.status == 200) {
         if (response.data.status == 1) {
           alert("OTP Validated")
-          seIsOTPValdated(true);
+          const response = await axios.post("http://localhost:8080/deleteotp",{
+            emailAddress:emailAddress
+          })
+          if (response.status==200){
+            seIsOTPValdated(true);
+          }
+          
         } else if (response.data.status == 0) {
           seIsOTPValdated(false);
           alert("Invalid OTP");
@@ -94,7 +100,9 @@ const OTPPage = () => {
         </div>
 
         {/* Buttons Section */}
-        <div className="otp-button-group">
+        {
+          !isOTPvalidated ? (
+            <div className="otp-button-group">
           <button className="btn send-btn" onClick={sendOTP}>
             Send OTP
           </button>
@@ -102,6 +110,8 @@ const OTPPage = () => {
             Validate OTP
           </button>
         </div>
+          ):null
+        }
 
         {/* Reset Password Button (You will control visibility) */}
         {isOTPvalidated ? (
