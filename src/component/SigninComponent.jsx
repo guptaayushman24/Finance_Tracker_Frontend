@@ -16,6 +16,10 @@ function SigninComponent() {
   function routeToSignup() {
     navigate("/signup");
   }
+
+  function routeToResetPassword(){
+    navigate("/passwordreset")
+  }
   
   // State for storing the fields
   const [emailAddress, setEmailAddress] = useState("");
@@ -133,6 +137,11 @@ function SigninComponent() {
         <p className="signin-footer">
           Don’t have an account? <span onClick={routeToSignup}>Sign Up</span>
         </p>
+
+        <p className="signin-footer">
+          Forget Password? <span onClick={routeToResetPassword}>Reset Password</span>
+        </p>
+
       </div>
     </div>
   );
