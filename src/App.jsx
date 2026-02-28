@@ -4,6 +4,7 @@ import Signup from "./component/SignupComponent";
 import { BrowserRouter, Route,Routes } from "react-router-dom";
 import ViewFinanceDetail from "./component/ViewFinanceDetail";
 import OTPPage from "./component/OTPPage";
+import Dashboard from "./module/Dashboard";
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signin" element={<SigninComponent></SigninComponent>}></Route>
         <Route path="/viewfinance" element={<ViewFinanceDetail></ViewFinanceDetail>}></Route>
         <Route path="/passwordreset" element={<OTPPage></OTPPage>}></Route>
+        <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
       </Routes>
     </BrowserRouter>
   );
