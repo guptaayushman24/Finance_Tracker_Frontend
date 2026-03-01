@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-
+import AddExpenseModal from "./AddModal";
 const Module1 = () => {
+  const [showModal, setShowModal] = useState(false);
+  const addExpense = () => {
+    setShowModal(true);
+  }
   return (
     <div className="module-card">
 
@@ -10,40 +14,48 @@ const Module1 = () => {
         <div>
           <h5>Expense Managment</h5>
         </div>
-         <div className="module-header">
-        <Button variant="primary">Add Expense</Button>
-        <Button variant="outline-danger">Report</Button>
-        <Button variant="outline-success">Total Expense</Button>
-        <Button variant="outline-dark">Settings</Button>
-      </div>
+        <div className="module-header">
+          <Button variant="primary" onClick={addExpense}>Add Expense</Button>
+          {
+            showModal ? (
+              <AddExpenseModal
+                show={showModal}
+                handleClose={() => setShowModal(false)}
+              />
+            ) : null
+          }
+          <Button variant="outline-danger">Report</Button>
+          <Button variant="outline-success">Total Expense</Button>
+          <Button variant="outline-dark">Settings</Button>
+        </div>
 
       </div>
 
       {/* FILTER ROW */}
-       <div className="module-header-parent">
+      <div className="module-header-parent">
         <div>
           <h5>Filter and Total</h5>
         </div>
-         <div className="module-header">
-        <Button variant="primary" className="expensemanagmentbtn">Filter By Date</Button>
-        <Button variant="outline-danger" className="expensemanagmentbtn">Payment Method</Button>
-        <Button variant="outline-success" className="expensemanagmentbtn">Sum of Expense</Button>
-        <Button variant="outline-dark" className="expensemanagmentbtn">Sort</Button>
-      </div>
+        <div className="module-header">
+          <Button variant="primary" className="expensemanagmentbtn">Filter By Date</Button>
+          <Button variant="outline-danger" className="expensemanagmentbtn">Payment Method</Button>
+          <Button variant="outline-success" className="expensemanagmentbtn">Sum of Expense</Button>
+          <Button variant="outline-dark" className="expensemanagmentbtn">Sort</Button>
+        </div>
 
       </div>
 
       {/* ADVANCE DETAIL */}
 
-       <div className="module-header-parent">
+      <div className="module-header-parent">
         <div>
           <h5>Advance Detail</h5>
         </div>
-         <div className="module-header">
-        <Button variant="primary" className="expensemanagmentbtn">Current Day</Button>
+        <div className="module-header">
+          <Button variant="primary" className="expensemanagmentbtn">Current Day</Button>
           <Button variant="outline-danger" className="expensemanagmentbtn">Month</Button>
           <Button variant="outline-success" className="expensemanagmentbtn">Year</Button>
-      </div>
+        </div>
 
       </div>
 
@@ -73,12 +85,12 @@ const Module1 = () => {
               </td>
             </tr>
 
-            
+
           </tbody>
         </table>
       </div>
 
-      
+
     </div>
   );
 };
