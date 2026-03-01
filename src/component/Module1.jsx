@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import AddExpenseModal from "./AddModal";
+import Setting from "./Setting";
 const Module1 = () => {
   const [showModal, setShowModal] = useState(false);
   const addExpense = () => {
@@ -8,8 +9,8 @@ const Module1 = () => {
   }
   return (
     <div className="module-card">
-
-      {/* HEADER */}
+        <Setting></Setting>
+      {/* HEADER */}  
       <div className="module-header-parent">
         <div>
           <h5>Expense Managment</h5>
@@ -26,7 +27,6 @@ const Module1 = () => {
           }
           <Button variant="outline-danger">Report</Button>
           <Button variant="outline-success">Total Expense</Button>
-          <Button variant="outline-dark">Settings</Button>
         </div>
 
       </div>
