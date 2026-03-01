@@ -83,11 +83,9 @@ function SigninComponent() {
           },
         )
         if (response.status == 200) {
-          console.log("Status is"+" "+response.status)
-          console.log("Token is"+" "+token);
           dispatch(setFirstName(response.data.firstName));
           dispatch(setLastName(response.data.lastName));
-          navigate("/viewfinance");
+          navigate("/dashboard");
         }
       } catch (error) {
         console.error("Login error:", error.response?.data || error.message);
