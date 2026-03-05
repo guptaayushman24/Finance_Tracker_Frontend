@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import AddExpenseModal from "./AddModal";
+import Setting from "./Setting";
+import AllExpenseByUser from "./AllExpenseByUser";
 const Module1 = () => {
   const [showModal, setShowModal] = useState(false);
   const addExpense = () => {
@@ -8,8 +10,9 @@ const Module1 = () => {
   }
   return (
     <div className="module-card">
-
-      {/* HEADER */}
+      {/* Setting icon */}
+        <Setting></Setting>
+      {/* HEADER */}  
       <div className="module-header-parent">
         <div>
           <h5>Expense Managment</h5>
@@ -26,7 +29,6 @@ const Module1 = () => {
           }
           <Button variant="outline-danger">Report</Button>
           <Button variant="outline-success">Total Expense</Button>
-          <Button variant="outline-dark">Settings</Button>
         </div>
 
       </div>
@@ -46,50 +48,7 @@ const Module1 = () => {
       </div>
 
       {/* ADVANCE DETAIL */}
-
-      <div className="module-header-parent">
-        <div>
-          <h5>Advance Detail</h5>
-        </div>
-        <div className="module-header">
-          <Button variant="primary" className="expensemanagmentbtn">Current Day</Button>
-          <Button variant="outline-danger" className="expensemanagmentbtn">Month</Button>
-          <Button variant="outline-success" className="expensemanagmentbtn">Year</Button>
-        </div>
-
-      </div>
-
-      {/* TABLE */}
-      <div className="table-section">
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Payment Mode</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Map your expenses here */}
-            <tr>
-              <td>Food</td>
-              <td>₹500</td>
-              <td>12-02-2026</td>
-              <td>UPI</td>
-              <td>
-                <Button size="sm" variant="danger">
-                  Delete
-                </Button>
-              </td>
-            </tr>
-
-
-          </tbody>
-        </table>
-      </div>
-
+          <AllExpenseByUser></AllExpenseByUser>
 
     </div>
   );
