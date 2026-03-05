@@ -10,6 +10,9 @@ const ModuleHeader = () => {
   const [allExpense, setAllExpense] = useState([]);
   const [userRegisteredExpense,setUserRegisteredExpense] = useState([]);
 
+  const [newExpenseCategory,setNewExpenseCategory] = useState('');
+  const [deleteExpenseCategory,setDeleteExpenseCategory] = useState('');
+
   const handleClose = () => setShowSettings(false);
   const handleShow = () => setShowSettings(true);
 
@@ -17,12 +20,11 @@ const ModuleHeader = () => {
     try {
       const response = await axiosInstance.get("http://localhost:8081/availableexpense");
       if (response.status == 200) {
-        console.log("Expense"+" "+allExpense);
         setAllExpense(response.data);
       }
     }
     catch (error) {
-      console.log("Error in fetching data" + " " + error);
+      console.error("Error in fetching data" + " " + error);
     }
   }
 
@@ -35,7 +37,36 @@ const ModuleHeader = () => {
     }
     }
     catch(error){
-       console.log("Error in fetching data" + " " + error);
+       console.error("Error in fetching data" + " " + error);
+    }
+  }
+
+  const addNewExpenseCategory = async () =>{
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/addnewexpense",{
+         newUserExpense:newExpenseCategory
+      })
+      if (response.status==200){
+        console.error("New Expense Category"+" "+newExpenseCategory);
+        alert("New Expense Category added successfully");
+      }
+    }
+    catch(error){
+      console.error("Error in adding data"+" "+error);
+    }
+  }
+
+  const deleteUserExpenseCategory = async() => {
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/deleteexpense",{
+        expenseTobeDeleted:deleteExpenseCategory
+      })
+      if (response.status==200){
+        alert("Expense Category removed from user");
+      }
+    }
+    catch(error){
+      console.error("Error in removing data"+" "+error);
     }
   }
   return (
@@ -61,15 +92,20 @@ const ModuleHeader = () => {
           <div className="mb-4">
             <Form.Select className="mb-2"
               onClick={allAvailableExpense}
+              value={newExpenseCategory}
+              onChange={(e)=>setNewExpenseCategory(e.target.value)}
             >
               <option>Select Expense Category</option>
+              
               {
                 allExpense.length>0 && allExpense.map((value,index)=>{
                   return <option key={index} value={value}>{value}</option>
                 })
               }
             </Form.Select>
-            <Button variant="primary" className="w-100">
+            <Button variant="primary" className="w-100"
+              onClick={addNewExpenseCategory}
+            >
               Add Expense Category
             </Button>
           </div>
@@ -80,7 +116,9 @@ const ModuleHeader = () => {
           <div>
             <h6>Delete Expense Category</h6>
             <Form.Select className="mb-2"
-              onClick={userExpense}
+             onClick={userExpense}
+              value={deleteExpenseCategory}
+              onChange={(e)=>setDeleteExpenseCategory(e.target.value)}
             >
               <option>Select Expense Category</option>
               {
@@ -92,7 +130,9 @@ const ModuleHeader = () => {
               }
             </Form.Select>
 
-            <Button variant="danger" className="w-100">
+            <Button variant="danger" className="w-100"
+              onClick={deleteUserExpenseCategory}
+            >
               Delete Expense Category
             </Button>
           </div>
