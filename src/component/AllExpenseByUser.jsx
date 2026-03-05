@@ -48,8 +48,8 @@ const AllExpenseByUser = () => {
               <th>Title</th>
               <th>Description</th>
               <th>Amount</th>
-              <th>Date</th>
               <th>Payment Mode</th>
+              <th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -62,9 +62,9 @@ const AllExpenseByUser = () => {
                   <tr key={index}>
                   <td>{value.expenseType}</td>
                   <td>{value.description}</td>
-                  <td>{value.expense_date}</td>
                   <td>{value.value}</td>
                   <td>{value.paymentMode}</td>
+                  <td>{value.expense_date}</td>
                   <td>
                     <Button size="sm" variant="danger">
                       Delete
