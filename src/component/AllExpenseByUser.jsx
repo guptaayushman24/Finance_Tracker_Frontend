@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import axiosInstance from "../util/AxiosInstance";
@@ -10,15 +10,32 @@ const AllExpenseByUser = () => {
       const response = await axiosInstance.get(
         "http://localhost:8081/allexpense",
       );
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.table(response.data);
+        setAllUserExpense(response.data.message || response.data || []);
         console.log("Status", response.status);
-        setAllUserExpense(response.data);
       }
     } catch (error) {
       console.log("Error in fetching data", error);
     }
   };
+
+  const deleteUserExpense = async (id) => {
+    try {
+      const response = await axiosInstance.post(
+        "http://localhost:8081/deleteuserexpense",
+        { id }
+      );
+      if (response.status === 200) {
+        alert("Expense of user deleted successfuly");
+        // refresh the list after deletion
+        fetchAllUserExpense();
+      }
+    } catch (error) {
+      console.log("Error in deleting data", error);
+    }
+  };
+
   useEffect(() => {
     fetchAllUserExpense();
   }, []);
@@ -45,8 +62,8 @@ const AllExpenseByUser = () => {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Description</th>
+              <th>Expense Type</th>
+              <th>Expense Description</th>
               <th>Amount</th>
               <th>Payment Mode</th>
               <th>Date</th>
@@ -55,25 +72,27 @@ const AllExpenseByUser = () => {
           </thead>
           <tbody>
             {/* Mapping Expense which is fetched from API */}
-
-            {allUserExpense.length > 0 &&
-              allUserExpense.map((value, index) => {
-                return(
+            {allUserExpense && allUserExpense.length > 0 &&
+              [...allUserExpense]
+                .reverse()
+                .map((value, index) => (
                   <tr key={index}>
-                  <td>{value.expenseType}</td>
-                  <td>{value.description}</td>
-                  <td>{value.value}</td>
-                  <td>{value.paymentMode}</td>
-                  <td>{value.expense_date}</td>
-                  <td>
-                    <Button size="sm" variant="danger">
-                      Delete
-                    </Button>
-                  </td>
-                  
-                </tr>
-                )
-              })}
+                    <td>{value.expenseType}</td>
+                    <td>{value.description}</td>
+                    <td>{value.value}</td>
+                    <td>{value.paymentMode}</td>
+                    <td>{value.expense_date}</td>
+                    <td>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => deleteUserExpense(value.id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>
