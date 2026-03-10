@@ -2,9 +2,12 @@ import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import axiosInstance from "../util/AxiosInstance";
-
+import ShowExpense from "./ShowExpense";
+import { useSelector } from "react-redux";
 const AllExpenseByUser = () => {
   const [allUserExpense, setAllUserExpense] = useState([]);
+  const paymentMethodFlag = useSelector((state)=>state.profile.paymentMethodFlag);
+  const userExpenseList = useSelector((state)=>state.profile.userExpenseList);
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
@@ -58,44 +61,15 @@ const AllExpenseByUser = () => {
         </div>
       </div>
 
-      <div className="table-section">
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Expense Type</th>
-              <th>Expense Description</th>
-              <th>Amount</th>
-              <th>Payment Mode</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Mapping Expense which is fetched from API */}
-            {allUserExpense && allUserExpense.length > 0 &&
-              [...allUserExpense]
-                .reverse()
-                .map((value, index) => (
-                  <tr key={index}>
-                    <td>{value.expenseType}</td>
-                    <td>{value.description}</td>
-                    <td>{value.value}</td>
-                    <td>{value.paymentMode}</td>
-                    <td>{value.expense_date}</td>
-                    <td>
-                      <Button
-                        size="sm"
-                        variant="danger"
-                        onClick={() => deleteUserExpense(value.id)}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-          </tbody>
-        </table>
-      </div>
+      {/* These component will render all the user expense */}
+      {/* <ShowExpense userExpense={allUserExpense}></ShowExpense> */}
+
+      {/* If paymentMethod flag is 1 then render the compoent ShowExpense by passing the allUserExpense */}
+      {
+        paymentMethodFlag===1 ? (
+          <ShowExpense userExpense={userExpenseList}></ShowExpense>
+        ):<ShowExpense userExpense={allUserExpense}></ShowExpense>
+      }
     </>
   );
 };
