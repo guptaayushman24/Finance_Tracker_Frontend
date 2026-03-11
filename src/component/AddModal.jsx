@@ -19,29 +19,30 @@ const AddExpenseModal = ({ show, handleClose }) => {
 
   const [storeId, setStoreId] = useState(-1);
   const saveExpense = async () => {
+     console.log("Payment Mode", paymentMode);
     setLoadingSaveExpense(true);
-    try{
+    try {
+       
       const response = await axiosInstance.post(
-      "http://localhost:8081/userexpense",
-      {
-        expenseType: userregisterexpense,
-        value: parseInt(amoumt),
-        description: description,
-        paymentMode: paymentMode,
-        expenseDate: expenseDate
-      },
-    );
-    if (response.status == 200) {
-      alert("User Expense saved successfully");
-      setLoadingSaveExpense(false);
-    }
-    }
-    catch(error){
-      console.log("Date is"+" "+expenseDate);
-      console.log("Error"+" "+error);
+      
+        "http://localhost:8081/userexpense",
+        {
+          expenseType: userregisterexpense,
+          value: parseInt(amoumt),
+          description: description,
+          paymentMode: paymentMode,
+          expenseDate: expenseDate,
+        },
+      );
+      if (response.status == 200) {
+        alert("User Expense saved successfully");
+        setLoadingSaveExpense(false);
+      }
+    } catch (error) {
+      console.log("Date is" + " " + expenseDate);
+      console.log("Error" + " " + error);
     }
   };
-
 
   const showUserExpense = async () => {
     const response = await axiosInstance.get(
@@ -119,15 +120,19 @@ const AddExpenseModal = ({ show, handleClose }) => {
                     value={paymentMode}
                     onChange={(e)=>setpaymentMode(e.target.value)}
                   >
-                    <option>
-                      Cash
+                    <option value="Select Payment Method">
+                      Select Payment Method
                     </option>
-                    <option>
+                    <option value="Cash">
+                      Cash
+                    </option>ß
+                    <option value="UPI">
                       UPI
                     </option>
                   </Form.Select>
                 </div>
               </Form.Group>
+              
             </Col>
 
             {/* Expense Date */}

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axiosInstance from "../util/AxiosInstance";
 import { useDispatch } from "react-redux";
-import { setPaymentMethodFlag } from "../feature/slice/Slice";
+import { setPaymentMethodFlag, setUserExpenseList } from "../feature/slice/Slice";
+import AllExpenseByUser from "../component/AllExpenseByUser"
 const PaymentModePopup = ({ show, handleClose }) => {
   const [paymentMode, setPaymentMode] = useState("");
-  const [allUserExpense, setAllUserExpense] = useState([]);
+  // const [allUserExpense, setAllUserExpense] = useState([]);
+  const [paymentMethodFilterTrigger,setPaymentMethodFilterTrigger] = useState(false);
   const dispatch = useDispatch();
   const paymentMethod = new Map();
   paymentMethod.set("UPI",1);
@@ -16,25 +18,29 @@ const PaymentModePopup = ({ show, handleClose }) => {
       dispatch(setPaymentMethodFlag(1));
       if (paymentMethod.get(paymentMode)==1){
        // CALL the UPI
-       paymentMode="UPI"
+       setPaymentMode("UPI");
     }
     else if (paymentMethod.get(paymentMode)==0){
       // CALL the CASH
-      paymentMode="CASH"
+      setPaymentMode("CASH");
     }
     const response = await axiosInstance.post("http://localhost:8081/filterbypaymentmode",{
            paymentMode:paymentMode
         })
         if (response.status===200){
-          dispatch(setAllUserExpense(response.data.message || response.data || []));
+          dispatch(setUserExpenseList(response.data));
+          setPaymentMethodFilterTrigger(true);
+          <AllExpenseByUser></AllExpenseByUser>
         }
     }
     catch(error){
+      console.error(error);
       console.error("Something went wrong !!!!");
     }
   }
   return (
     <Modal show={show} onHide={handleClose} centered>
+      
       <Modal.Header closeButton>
         <Modal.Title>Select Payment Mode</Modal.Title>
       </Modal.Header>
@@ -50,7 +56,6 @@ const PaymentModePopup = ({ show, handleClose }) => {
               label="UPI"
               value="UPI"
               onChange={(e) => setPaymentMode(e.target.value)}
-              onClick={(e)=>filterByPaymentMethod(e.target.value)}
             />
           </div>
 
@@ -62,7 +67,6 @@ const PaymentModePopup = ({ show, handleClose }) => {
               label="CASH"
               value="CASH"
               onChange={(e) => setPaymentMode(e.target.value)}
-              onClick={(e)=>filterByPaymentMethod(e.target.value)}
             />
           </div>
 
@@ -78,6 +82,7 @@ const PaymentModePopup = ({ show, handleClose }) => {
           onClick={filterByPaymentMethod}
         >
           Apply Filter
+        
         </Button>
       </Modal.Footer>
     </Modal>

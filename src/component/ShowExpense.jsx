@@ -1,8 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import axiosInstance from "../util/AxiosInstance";
 function ShowExpense (props){
   const allUserExpense = props.userExpense;
+  const deleteUserExpense = async (id) => {
+    try {
+      const response = await axiosInstance.post(
+        "http://localhost:8081/deleteuserexpense",
+        { id }
+      );
+      if (response.status === 200) {
+        alert("Expense of user deleted successfuly");
+        // refresh the list after deletion
+        // fetchAllUserExpense();
+      }
+    } catch (error) {
+      console.log("Error in deleting data", error);
+    }
+  };
+  useEffect(()=>{
+    <ShowExpense></ShowExpense>
+  },[])
   return(
+     
     <div className="table-section">
         <table className="table table-hover">
           <thead>

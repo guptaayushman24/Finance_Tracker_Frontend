@@ -6,8 +6,15 @@ import ShowExpense from "./ShowExpense";
 import { useSelector } from "react-redux";
 const AllExpenseByUser = () => {
   const [allUserExpense, setAllUserExpense] = useState([]);
-  const paymentMethodFlag = useSelector((state)=>state.profile.paymentMethodFlag);
-  const userExpenseList = useSelector((state)=>state.profile.userExpenseList);
+  const paymentMethodFlag = useSelector(
+    (state) => state.profile.paymentMethodFlag,
+  );
+  console.log("Payment Method Flag",paymentMethodFlag);
+ 
+  const userExpenseList = useSelector((state) => state.profile.userExpenseList);
+    // These list is comming empty
+   console.log("User Expense List",userExpenseList);
+
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
@@ -20,22 +27,6 @@ const AllExpenseByUser = () => {
       }
     } catch (error) {
       console.log("Error in fetching data", error);
-    }
-  };
-
-  const deleteUserExpense = async (id) => {
-    try {
-      const response = await axiosInstance.post(
-        "http://localhost:8081/deleteuserexpense",
-        { id }
-      );
-      if (response.status === 200) {
-        alert("Expense of user deleted successfuly");
-        // refresh the list after deletion
-        fetchAllUserExpense();
-      }
-    } catch (error) {
-      console.log("Error in deleting data", error);
     }
   };
 
@@ -65,11 +56,11 @@ const AllExpenseByUser = () => {
       {/* <ShowExpense userExpense={allUserExpense}></ShowExpense> */}
 
       {/* If paymentMethod flag is 1 then render the compoent ShowExpense by passing the allUserExpense */}
-      {
-        paymentMethodFlag===1 ? (
-          <ShowExpense userExpense={userExpenseList}></ShowExpense>
-        ):<ShowExpense userExpense={allUserExpense}></ShowExpense>
-      }
+      {paymentMethodFlag === 1   ? (
+        <ShowExpense userExpense={userExpenseList}></ShowExpense>
+      ) : (
+        <ShowExpense userExpense={allUserExpense}></ShowExpense>
+      )}
     </>
   );
 };
