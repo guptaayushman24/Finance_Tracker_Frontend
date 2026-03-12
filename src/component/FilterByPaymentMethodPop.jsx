@@ -13,6 +13,7 @@ const PaymentModePopup = ({ show, handleClose }) => {
   paymentMethod.set("UPI",1);
   paymentMethod.set("CASH",0);
 
+  
   const filterByPaymentMethod = async() =>{
     try{
       dispatch(setPaymentMethodFlag(1));
