@@ -25,7 +25,7 @@ export const profileSlice = createSlice({
       state.paymentMethodFlag = action.payload;
     },
     setUserExpenseList:(state,action)=>{
-      state.userExpenseList = action.userExpenseList;
+      state.userExpenseList = action.payload;
     }
   }
 })

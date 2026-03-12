@@ -30,7 +30,6 @@ const PaymentModePopup = ({ show, handleClose }) => {
         if (response.status===200){
           dispatch(setUserExpenseList(response.data));
           setPaymentMethodFilterTrigger(true);
-          <AllExpenseByUser></AllExpenseByUser>
         }
     }
     catch(error){
