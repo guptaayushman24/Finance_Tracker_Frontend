@@ -44,3 +44,8 @@ button.btn-primary {
 button.btn-outline-secondary {
   border-radius: 10px;
 }
+
+.expense-type{
+  color: red;
+  margin-left: 10px;
+}

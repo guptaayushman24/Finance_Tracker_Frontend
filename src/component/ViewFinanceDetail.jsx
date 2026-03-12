@@ -6,6 +6,6 @@ function ViewFinanceDetail(){
     <div>
       Welcome {firstName +" "+ lastName}
     </div>
-  )
+  ) 
 }
 export default ViewFinanceDetail;

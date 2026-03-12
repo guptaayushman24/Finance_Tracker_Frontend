@@ -18,30 +18,41 @@ const AddExpenseModal = ({ show, handleClose }) => {
   const [loadingSaveExpense, setLoadingSaveExpense] = useState(false);
 
   const [storeId, setStoreId] = useState(-1);
+  const [refreshPage,setRefreshPage] = useState(false);
+  // Checking all the mandatory field are filled by user
+  const isDisabled =
+    !userRegisteredExpense ||
+    userRegisteredExpense.length === 0 ||
+    !amoumt ||
+    amoumt <= 0 ||
+    !paymentMode ||
+    paymentMode.length === 0 ||
+    !expenseDate ||
+    expenseDate.length === 0;
   const saveExpense = async () => {
+    console.log("Payment Mode", paymentMode);
     setLoadingSaveExpense(true);
-    try{
+    try {
       const response = await axiosInstance.post(
-      "http://localhost:8081/userexpense",
-      {
-        expenseType: userregisterexpense,
-        value: parseInt(amoumt),
-        description: description,
-        paymentMode: paymentMode,
-        expenseDate: expenseDate
-      },
-    );
-    if (response.status == 200) {
-      alert("User Expense saved successfully");
-      setLoadingSaveExpense(false);
-    }
-    }
-    catch(error){
-      console.log("Date is"+" "+expenseDate);
-      console.log("Error"+" "+error);
+        "http://localhost:8081/userexpense",
+        {
+          expenseType: userregisterexpense,
+          value: parseInt(amoumt),
+          description: description,
+          paymentMode: paymentMode,
+          expenseDate: expenseDate,
+        },
+      );
+      if (response.status == 200) {
+        setLoadingSaveExpense(false);
+        setRefreshPage(prev => !prev);
+       
+      }
+    } catch (error) {
+      console.log("Date is" + " " + expenseDate);
+      console.log("Error" + " " + error);
     }
   };
-
 
   const showUserExpense = async () => {
     const response = await axiosInstance.get(
@@ -53,7 +64,8 @@ const AddExpenseModal = ({ show, handleClose }) => {
   };
   useEffect(() => {
     showUserExpense();
-  }, []);
+     console.log("Refresh page",refreshPage);
+  }, [refreshPage]);
   return (
     <Modal
       show={show}
@@ -92,6 +104,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
                   </Form.Select>
                 </div>
               </Form.Group>
+              <div className="expense-type">*Mandatory Field</div>
             </Col>
 
             {/* Value */}
@@ -107,6 +120,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
                   />
                 </div>
               </Form.Group>
+              <div className="expense-type">*Mandatory Field</div>
             </Col>
 
             {/* Payment Mode */}
@@ -117,16 +131,16 @@ const AddExpenseModal = ({ show, handleClose }) => {
                   <FaWallet />
                   <Form.Select
                     value={paymentMode}
-                    onChange={(e)=>setpaymentMode(e.target.value)}
+                    onChange={(e) => setpaymentMode(e.target.value)}
                   >
-                    <option>
-                      Cash
+                    <option value="Select Payment Method">
+                      Select Payment Method
                     </option>
-                    <option>
-                      UPI
-                    </option>
+                    <option value="Cash">Cash</option>
+                    <option value="UPI">UPI</option>
                   </Form.Select>
                 </div>
+                <div className="expense-type">*Mandatory Field</div>
               </Form.Group>
             </Col>
 
@@ -141,6 +155,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
                     onChange={(e) => setexpenseDate(e.target.value)}
                   />
                 </div>
+                <div className="expense-type">*Mandatory Field</div>
               </Form.Group>
             </Col>
 
@@ -167,7 +182,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
         {loadingSaveExpense ? (
           <Button variant="primary">Saving Expense</Button>
         ) : (
-          <Button variant="primary" onClick={saveExpense}>
+          <Button variant="primary" onClick={saveExpense} disabled={isDisabled}>
             Save Expense
           </Button>
         )}

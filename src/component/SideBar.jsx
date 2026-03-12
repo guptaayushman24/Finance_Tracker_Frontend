@@ -9,14 +9,14 @@ const Sidebar = ({ active, setActive }) => {
         className={`sidebar-btn ${active === "module1" && "active"}`}
         onClick={() => setActive("module1")}
       >
-        Module 1
+        Expense Tracker
       </button>
 
       <button
         className={`sidebar-btn ${active === "module2" && "active"}`}
         onClick={() => setActive("module2")}
       >
-        Module 2
+       Expense Visualization
       </button>
     </div>
   );
