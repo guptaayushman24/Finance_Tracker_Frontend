@@ -4,10 +4,15 @@ import AddExpenseModal from "./AddModal";
 import Setting from "./Setting";
 import AllExpenseByUser from "./AllExpenseByUser";
 import FilterTotal from "./FilterTotal";
+import TotalExpenseMonthYear from "./TotalExpenseMonthYear";
 const Module1 = () => {
   const [showModal, setShowModal] = useState(false);
+  const [totalExpensePopUp,setTotalExpensePopUp] = useState(false);
   const addExpense = () => {
     setShowModal(true);
+  }
+  const showTotalExpense = ()=>{
+    setTotalExpensePopUp(true);
   }
   return (
     <div className="module-card">
@@ -29,7 +34,19 @@ const Module1 = () => {
             ) : null
           }
           <Button variant="outline-danger">Report</Button>
-          <Button variant="outline-success">Total Expense</Button>
+          <Button variant="outline-success"
+            onClick={showTotalExpense}
+          >Total Expense</Button>
+
+          {
+            totalExpensePopUp ?(
+              <TotalExpenseMonthYear
+                show={setTotalExpensePopUp}
+                handleClose={()=>setTotalExpensePopUp(false)}
+              ></TotalExpenseMonthYear>
+            ):null
+          }
+          
         </div>
 
       </div>

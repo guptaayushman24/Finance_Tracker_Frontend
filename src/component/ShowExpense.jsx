@@ -15,7 +15,7 @@ function ShowExpense (props){
         // fetchAllUserExpense();
       }
     } catch (error) {
-      console.log("Error in deleting data", error);
+      console.error("Error in deleting data", error);
     }
   };
   useEffect(()=>{

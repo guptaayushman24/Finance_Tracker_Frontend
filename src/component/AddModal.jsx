@@ -30,7 +30,6 @@ const AddExpenseModal = ({ show, handleClose }) => {
     !expenseDate ||
     expenseDate.length === 0;
   const saveExpense = async () => {
-    console.log("Payment Mode", paymentMode);
     setLoadingSaveExpense(true);
     try {
       const response = await axiosInstance.post(
@@ -49,7 +48,6 @@ const AddExpenseModal = ({ show, handleClose }) => {
        
       }
     } catch (error) {
-      console.log("Date is" + " " + expenseDate);
       console.log("Error" + " " + error);
     }
   };

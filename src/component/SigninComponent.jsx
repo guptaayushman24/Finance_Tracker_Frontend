@@ -39,7 +39,7 @@ function SigninComponent() {
 
   const signIn = async () => {
     if (emailAddress.length >= 0 && !emailRegex.test(emailAddress)) {
-      console.log("Error");
+      console.error("Error");
       setErrorEmailAddress(true);
     } else {
       setErrorEmailAddress(false);
@@ -64,9 +64,7 @@ function SigninComponent() {
           },
         );
         if (response.status == 200) {
-          console.log("Response Status"+" "+response.status);
           SetLoading(true);
-          console.log("Response is" + " " + response);
           localStorage.setItem("token", response.data.jwt);
           localStorage.setItem("id", response.data.id);
         }

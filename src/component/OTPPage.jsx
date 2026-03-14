@@ -18,13 +18,12 @@ const OTPPage = () => {
         alert("OTP Sent Successfully !!!!");
       }
     } catch (error) {
-      console.log("Error in the OTP", error);
+      console.error("Error in the OTP", error);
     }
   };
 
   const validateOTP = async () => {
     try {
-      console.log("OTP is", storeOtp);
       var enteredOTP = "";
       for (let i = 0; i < storeOtp.length; i++) {
         enteredOTP = enteredOTP + storeOtp[i];
