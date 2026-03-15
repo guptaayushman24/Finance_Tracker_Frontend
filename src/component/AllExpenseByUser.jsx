@@ -9,12 +9,8 @@ const AllExpenseByUser = () => {
   const paymentMethodFlag = useSelector(
     (state) => state.profile.paymentMethodFlag,
   );
-  console.log("Payment Method Flag",paymentMethodFlag);
  
   const userExpenseList = useSelector((state) => state.profile.userExpenseList);
-    // These list is comming empty
-   console.log("User Expense List",userExpenseList);
-
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
@@ -23,7 +19,6 @@ const AllExpenseByUser = () => {
       if (response.status === 200) {
         console.table(response.data);
         setAllUserExpense(response.data.message || response.data || []);
-        console.log("Status", response.status);
       }
     } catch (error) {
       console.log("Error in fetching data", error);

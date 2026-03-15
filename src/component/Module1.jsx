@@ -4,10 +4,37 @@ import AddExpenseModal from "./AddModal";
 import Setting from "./Setting";
 import AllExpenseByUser from "./AllExpenseByUser";
 import FilterTotal from "./FilterTotal";
+import TotalExpenseMonthYear from "./TotalExpenseMonthYear";
+import axiosInstance from "../util/AxiosInstance";
+import { setTotalExpenseByCurrentYear, setTotalExpenseByMonth } from "../feature/slice/Slice";
+import { useDispatch } from "react-redux";
 const Module1 = () => {
   const [showModal, setShowModal] = useState(false);
+  const [totalExpensePopUp,setTotalExpensePopUp] = useState(false);
+  const currentDate = new Date();
+  const dispatch = useDispatch();
   const addExpense = () => {
     setShowModal(true);
+  }
+  const showTotalExpense = async()=>{
+    setTotalExpensePopUp(true);
+    // Call the API of Total Expense
+    const response = await axiosInstance.post("http://localhost:8081/totalexpensebyyear",{
+       year:currentDate.getFullYear() // Current Year
+    })
+
+    if (response.status==200){
+      dispatch(setTotalExpenseByCurrentYear(response.data.sum));
+    }
+
+    // Call the API of Total Expense By Month
+    const responseByMonth = await axiosInstance.post("http://localhost:8081/totalexpensebymonth",{
+      month:currentDate.toLocaleString('en-US', { month: 'long' }),
+      year:currentDate.getFullYear()
+    })
+    if (responseByMonth.status==200){
+      dispatch(setTotalExpenseByMonth(responseByMonth.data.sum));
+    }
   }
   return (
     <div className="module-card">
@@ -29,7 +56,19 @@ const Module1 = () => {
             ) : null
           }
           <Button variant="outline-danger">Report</Button>
-          <Button variant="outline-success">Total Expense</Button>
+          <Button variant="outline-success"
+            onClick={showTotalExpense}
+          >Total Expense</Button>
+
+          {
+            totalExpensePopUp ?(
+              <TotalExpenseMonthYear
+                show={setTotalExpensePopUp}
+                handleClose={()=>setTotalExpensePopUp(false)}
+              ></TotalExpenseMonthYear>
+            ):null
+          }
+          
         </div>
 
       </div>

@@ -7,7 +7,9 @@ export const profileSlice = createSlice({
     firstName:"",
     lastName:"",
     paymentMethodFlag:0, // These flag will decide that we have to render which expense list,
-    userExpenseList:[] // These will store the list of the user expense
+    userExpenseList:[], // These will store the list of the user expense,
+    totalExpenseByCurrentYear:0, //  These will store the totalExpense of current year
+    totalExpenseByMonth:0 // These will store the totalExpense of current month
   },
   // Inside the reducer we have written the action
   reducers:{
@@ -26,6 +28,12 @@ export const profileSlice = createSlice({
     },
     setUserExpenseList:(state,action)=>{
       state.userExpenseList = action.payload;
+    },
+    setTotalExpenseByCurrentYear:(state,action)=>{
+      state.totalExpenseByCurrentYear = action.payload;
+    },
+    setTotalExpenseByMonth:(state,action)=>{
+      state.totalExpenseByMonth = action.payload;
     }
   }
 })
@@ -33,6 +41,6 @@ export const profileSlice = createSlice({
 
 // Action creators are generated for each reducer function
 
-export const {setProfileEmailAddress,setFirstName,setLastName,setPaymentMethodFlag,setUserExpenseList} = profileSlice.actions;
+export const {setProfileEmailAddress,setFirstName,setLastName,setPaymentMethodFlag,setUserExpenseList,setTotalExpenseByCurrentYear,setTotalExpenseByMonth} = profileSlice.actions;
 
 export default profileSlice.reducer;
