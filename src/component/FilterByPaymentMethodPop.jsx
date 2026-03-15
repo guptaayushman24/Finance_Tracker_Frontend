@@ -6,7 +6,6 @@ import { setPaymentMethodFlag, setUserExpenseList } from "../feature/slice/Slice
 import AllExpenseByUser from "../component/AllExpenseByUser"
 const PaymentModePopup = ({ show, handleClose }) => {
   const [paymentMode, setPaymentMode] = useState("");
-  // const [allUserExpense, setAllUserExpense] = useState([]);
   const [paymentMethodFilterTrigger,setPaymentMethodFilterTrigger] = useState(false);
   const dispatch = useDispatch();
   const paymentMethod = new Map();
