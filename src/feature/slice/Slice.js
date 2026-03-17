@@ -9,7 +9,9 @@ export const profileSlice = createSlice({
     paymentMethodFlag:0, // These flag will decide that we have to render which expense list,
     userExpenseList:[], // These will store the list of the user expense,
     totalExpenseByCurrentYear:0, //  These will store the totalExpense of current year
-    totalExpenseByMonth:0 // These will store the totalExpense of current month
+    totalExpenseByMonth:0, // These will store the totalExpense of current month
+    totalExpenseByCurrentYearPaymentModeUPI:0, // These will store the totalExpense in current year with the payment mode
+    totalExpenseByCurrentYearPaymentModeCASH:0
   },
   // Inside the reducer we have written the action
   reducers:{
@@ -34,6 +36,12 @@ export const profileSlice = createSlice({
     },
     setTotalExpenseByMonth:(state,action)=>{
       state.totalExpenseByMonth = action.payload;
+    },
+    setTotalExpenseByCurrentYearByPaymentModeUPI:(state,action)=>{
+      state.totalExpenseByCurrentYearPaymentModeUPI = action.payload;
+    },
+    setTotalExpenseByCurrentYearByPaymentModeCASH:(state,action)=>{
+      state.totalExpenseByCurrentYearPaymentModeCASH = action.payload;
     }
   }
 })
@@ -41,6 +49,6 @@ export const profileSlice = createSlice({
 
 // Action creators are generated for each reducer function
 
-export const {setProfileEmailAddress,setFirstName,setLastName,setPaymentMethodFlag,setUserExpenseList,setTotalExpenseByCurrentYear,setTotalExpenseByMonth} = profileSlice.actions;
+export const {setProfileEmailAddress,setFirstName,setLastName,setPaymentMethodFlag,setUserExpenseList,setTotalExpenseByCurrentYear,setTotalExpenseByMonth,setTotalExpenseByCurrentYearByPaymentModeUPI,setTotalExpenseByCurrentYearByPaymentModeCASH} = profileSlice.actions;
 
 export default profileSlice.reducer;

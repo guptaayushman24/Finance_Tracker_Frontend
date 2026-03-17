@@ -39,7 +39,7 @@
 .expense-month{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
 .expense-month p{
@@ -56,7 +56,7 @@
 
 .close-btn{
   position: absolute;
-  top: 10px;
+  top: 2px;
   right: 12px;
   border: none;
   background: transparent;
@@ -67,4 +67,18 @@
 
 .close-btn:hover{
   color: red;
+}
+.expense-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.expense-header-payment-mode{
+  display: flex;
+  gap: 10px;
+  color: black;
+}
+.payment-mode{
+  display: flex;
+  flex-direction: column;
 }
