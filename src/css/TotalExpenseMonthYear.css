@@ -81,4 +81,9 @@
 .payment-mode{
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.expense-month-parent{
+  display: flex;
+  flex-direction: column;
 }

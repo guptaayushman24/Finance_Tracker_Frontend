@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import "../css/TotalExpenseMonthYear.css";
+import { current } from "@reduxjs/toolkit";
 function TotalExpenseMonthYear({ show, handleClose }) {
   const currentDate = new Date();
   const firstName = useSelector((state) => state.profile.firstName);
@@ -12,14 +13,21 @@ function TotalExpenseMonthYear({ show, handleClose }) {
   );
 
   const totalExpenseCurrentYearByUPI = useSelector(
-    (state)=>state.profile.totalExpenseByCurrentYearPaymentModeUPI
-  )
+    (state) => state.profile.totalExpenseByCurrentYearPaymentModeUPI,
+  );
 
   const totalExpenseCurrentYearByCASH = useSelector(
-    (state)=>state.profile.totalExpenseByCurrentYearPaymentModeCASH
+    (state) => state.profile.totalExpenseByCurrentYearPaymentModeCASH,
+  );
+
+  const totalExpenseCurrentMonthByUPI = useSelector(
+    (state) => state.profile.totalExpenseByCurrentMonthPaymentModeUPI
   )
 
-  
+  const totalExpenseCurrentMonthByCASH = useSelector(
+    (state) => state.profile.totalExpenseByCurrentMonthPaymentModeCASH
+  )
+
   return (
     <div className="expense-summary-card">
       <button className="close-btn" onClick={handleClose}>
@@ -30,11 +38,11 @@ function TotalExpenseMonthYear({ show, handleClose }) {
 
         <div className="expense-header-payment-mode">
           <div className="payment-mode">
-            <p>Expense by UPI</p>
+            <p>Expense By UPI in {currentDate.getFullYear()}</p>
             <p>₹{totalExpenseCurrentYearByUPI}</p>
           </div>
           <div className="payment-mode">
-            <p>Expense by CASH</p>
+            <p>Expense by CASH in {currentDate.getFullYear()}</p>
             <p>₹{totalExpenseCurrentYearByCASH}</p>
           </div>
         </div>
@@ -47,11 +55,14 @@ function TotalExpenseMonthYear({ show, handleClose }) {
 
       <div className="expense-divider"></div>
 
-      <div className="expense-month">
-        <p>
-          {currentDate.toLocaleString("default", { month: "long" })} Month
-        </p>
+      <div className="expense-month-parent">
+        <div className="expense-month">
+        <p>{currentDate.toLocaleString("default", { month: "long" })} Month</p>
         <h4 className="amount">₹ {totalExpenseByMonthCurrentYear}</h4>
+      </div>
+
+      <p>Expense by UPI in {currentDate.toLocaleString('en-US', { month: 'long' })}₹{totalExpenseCurrentMonthByUPI}</p>
+      <p>Expense by CASH in {currentDate.toLocaleString('en-US', { month: 'long' })}₹{totalExpenseCurrentMonthByCASH}</p>
       </div>
     </div>
   );

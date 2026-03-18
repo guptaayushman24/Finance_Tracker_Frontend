@@ -6,7 +6,7 @@ import AllExpenseByUser from "./AllExpenseByUser";
 import FilterTotal from "./FilterTotal";
 import TotalExpenseMonthYear from "./TotalExpenseMonthYear";
 import axiosInstance from "../util/AxiosInstance";
-import { setTotalExpenseByCurrentYear, setTotalExpenseByCurrentYearByPaymentModeUPI,setTotalExpenseByCurrentYearByPaymentModeCASH, setTotalExpenseByMonth } from "../feature/slice/Slice";
+import { setTotalExpenseByCurrentYear, setTotalExpenseByCurrentYearByPaymentModeUPI,setTotalExpenseByCurrentYearByPaymentModeCASH, setTotalExpenseByMonth, setTotalExpenseByCurrentMonthPaymentModeUPI,setTotalExpenseByCurrentMonthPaymentModeCASH } from "../feature/slice/Slice";
 import { useDispatch } from "react-redux";
 const Module1 = () => {
   const [showModal, setShowModal] = useState(false);
@@ -55,6 +55,30 @@ const Module1 = () => {
     if (responseByCurrentYearByCash.status==200){
       console.log("Response",responseByCurrentYearByCash.data);
       dispatch(setTotalExpenseByCurrentYearByPaymentModeCASH(responseByCurrentYearByCash.data.sum));
+    }
+
+    // Call the API of Current Month By Payment Method for UPI
+    const responseInCurrentMonthByUPI = await axiosInstance.post("http://localhost:8081/totalexpensebyyearpaymentmode",{
+      month:currentDate.toLocaleString('en-US', { month: 'long' }),
+      paymentMode:"UPI",
+      year:currentDate.getFullYear()
+    })
+    
+    if (responseInCurrentMonthByUPI.status==200){
+      console.log ("Month Payment Mode",responseInCurrentMonthByUPI.data.sum);
+      dispatch(setTotalExpenseByCurrentMonthPaymentModeUPI(responseInCurrentMonthByUPI.data.sum));
+    }
+
+    // Call the API of Current Month By Payment Mode for CASH
+    const responseInCurrentMonthByCASH = await axiosInstance.post("http://localhost:8081/totalexpensebyyearpaymentmode",{
+       month:currentDate.toLocaleString('en-US', { month: 'long' }),
+      paymentMode:"CASH",
+      year:currentDate.getFullYear()
+    })
+
+    if (responseInCurrentMonthByCASH.status==200){
+      console.log("Month Payment Mode",responseInCurrentMonthByCASH.data.sum);
+      dispatch(setTotalExpenseByCurrentMonthPaymentModeCASH(responseInCurrentMonthByCASH.data.sum));
     }
   }
   return (
