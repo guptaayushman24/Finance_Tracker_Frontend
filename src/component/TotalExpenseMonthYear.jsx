@@ -21,12 +21,12 @@ function TotalExpenseMonthYear({ show, handleClose }) {
   );
 
   const totalExpenseCurrentMonthByUPI = useSelector(
-    (state) => state.profile.totalExpenseByCurrentMonthPaymentModeUPI
-  )
+    (state) => state.profile.totalExpenseByCurrentMonthPaymentModeUPI,
+  );
 
   const totalExpenseCurrentMonthByCASH = useSelector(
-    (state) => state.profile.totalExpenseByCurrentMonthPaymentModeCASH
-  )
+    (state) => state.profile.totalExpenseByCurrentMonthPaymentModeCASH,
+  );
 
   return (
     <div className="expense-summary-card">
@@ -36,33 +36,53 @@ function TotalExpenseMonthYear({ show, handleClose }) {
       <div className="expense-header">
         <h4>Hi {firstName + " " + lastName}👋</h4>
 
+        <div className="expense-main">
+          <div className="expense-row">
+              <p>Total Expense in  {currentDate.getFullYear()}</p>
+              <b>₹ {totalExpenseByCurrentYear}</b>
+            </div>
+        </div>
+
+        {/* Year Expense */}
         <div className="expense-header-payment-mode">
-          <div className="payment-mode">
-            <p>Expense By UPI in {currentDate.getFullYear()}</p>
-            <p>₹{totalExpenseCurrentYearByUPI}</p>
-          </div>
-          <div className="payment-mode">
-            <p>Expense by CASH in {currentDate.getFullYear()}</p>
-            <p>₹{totalExpenseCurrentYearByCASH}</p>
+            <div className="expense-row">
+              <p>Expense By UPI in {currentDate.getFullYear()}</p>
+              <b>₹ {totalExpenseCurrentYearByUPI}</b>
+            </div>
+          
+
+          <div className="expense-month">
+            <div className="expense-row">
+              <p>Expense By CASH in {currentDate.getFullYear()}</p>
+              <b>₹ {totalExpenseCurrentYearByCASH}</b>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="expense-main">
-        <p className="label">Total Expense in {currentDate.getFullYear()}</p>
-        <h1 className="amount">₹ {totalExpenseByCurrentYear}</h1>
-      </div>
-
       <div className="expense-divider"></div>
 
+      {/* Month Expense */}
       <div className="expense-month-parent">
-        <div className="expense-month">
-        <p>{currentDate.toLocaleString("default", { month: "long" })} Month</p>
-        <h4 className="amount">₹ {totalExpenseByMonthCurrentYear}</h4>
-      </div>
+       
+          <div className="expense-row">
+            <p>Total Expense in {currentDate.toLocaleString("en-US", { month: "long" })}</p>
+            <b>₹ {totalExpenseByMonthCurrentYear}</b>
+          </div>
 
-      <p>Expense by UPI in {currentDate.toLocaleString('en-US', { month: 'long' })}₹{totalExpenseCurrentMonthByUPI}</p>
-      <p>Expense by CASH in {currentDate.toLocaleString('en-US', { month: 'long' })}₹{totalExpenseCurrentMonthByCASH}</p>
+        <div className="expense-row">
+          <p>
+            Expense by UPI in {currentDate.toLocaleString("en-US", { month: "long" })}
+          </p>
+          <b>₹ {totalExpenseCurrentMonthByUPI}</b>
+        </div>
+
+        <div className="expense-row">
+          <p>
+            Expense by CASH in {currentDate.toLocaleString("en-US", { month: "long" })}
+          </p>
+          <b>₹ {totalExpenseCurrentMonthByCASH}</b>
+        </div>
       </div>
     </div>
   );

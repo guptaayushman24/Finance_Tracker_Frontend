@@ -58,7 +58,7 @@ const Module1 = () => {
     }
 
     // Call the API of Current Month By Payment Method for UPI
-    const responseInCurrentMonthByUPI = await axiosInstance.post("http://localhost:8081/totalexpensebyyearpaymentmode",{
+    const responseInCurrentMonthByUPI = await axiosInstance.post("http://localhost:8081/totalexpensebymonthpaymentmode",{
       month:currentDate.toLocaleString('en-US', { month: 'long' }),
       paymentMode:"UPI",
       year:currentDate.getFullYear()
@@ -70,7 +70,7 @@ const Module1 = () => {
     }
 
     // Call the API of Current Month By Payment Mode for CASH
-    const responseInCurrentMonthByCASH = await axiosInstance.post("http://localhost:8081/totalexpensebyyearpaymentmode",{
+    const responseInCurrentMonthByCASH = await axiosInstance.post("http://localhost:8081/totalexpensebymonthpaymentmode",{
        month:currentDate.toLocaleString('en-US', { month: 'long' }),
       paymentMode:"CASH",
       year:currentDate.getFullYear()
@@ -92,14 +92,15 @@ const Module1 = () => {
         </div>
         <div className="module-header">
           <Button variant="primary" onClick={addExpense}>Add Expense</Button>
-          {
+           {
             showModal ? (
               <AddExpenseModal
                 show={showModal}
                 handleClose={() => setShowModal(false)}
               />
             ) : null
-          }
+          } 
+      
           <Button variant="outline-danger">Report</Button>
           <Button variant="outline-success"
             onClick={showTotalExpense}
