@@ -1,0 +1,355 @@
+/* ============================================================
+   SumOfExpense.css — Light theme for modal popup
+   ============================================================ */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --card-bg:          #ffffff;
+  --card-border:      #e9ecef;
+  --card-shadow:      0 4px 16px rgba(0,0,0,0.08);
+  --divider:          #f0f0f0;
+
+  --text-dark:        #1a1a2e;
+  --text-muted:       #6c757d;
+  --text-dim:         #adb5bd;
+  --text-faint:       #ced4da;
+
+  --control-bg:       #f8f9fa;
+  --control-border:   #dee2e6;
+  --toggle-wrap-bg:   #f1f3f5;
+
+  --upi-grad:         linear-gradient(135deg, #6c63ff, #a855f7);
+  --upi-tint:         #f0eeff;
+  --upi-border:       #d4ccff;
+  --upi-text:         #6c63ff;
+  --upi-bar:          linear-gradient(90deg, #6c63ff, #a855f7);
+  --upi-pill-grad:    linear-gradient(135deg, #6c63ff, #a855f7);
+  --year-accent:      linear-gradient(180deg, #6c63ff, #a855f7);
+
+  --cash-grad:        linear-gradient(135deg, #10b981, #059669);
+  --cash-tint:        #edfaf4;
+  --cash-border:      #a7f3d0;
+  --cash-text:        #059669;
+  --cash-bar:         linear-gradient(90deg, #10b981, #059669);
+  --cash-pill-grad:   linear-gradient(135deg, #10b981, #059669);
+
+  --month-accent:     linear-gradient(180deg, #f97316, #fb923c);
+
+  --font-main:        'Sora', 'Segoe UI', sans-serif;
+  --font-mono:        'JetBrains Mono', monospace;
+}
+
+/* ---------- Popup Body Wrapper ---------- */
+.ec-popup-body {
+  background: #f8f9fa;
+  font-family: var(--font-main);
+  padding: 20px;
+}
+
+.ec-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.ec-header {
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.ec-header__label {
+  color: var(--text-faint);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.ec-header__title {
+  color: var(--text-dark);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* ---------- Card ---------- */
+.ec-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+/* ---------- Controls Row ---------- */
+.ec-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--divider);
+}
+
+/* Select dropdowns */
+.ec-select-wrap {
+  position: relative;
+}
+
+.ec-select {
+  appearance: none;
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  border-radius: 10px;
+  color: var(--text-dark);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  padding: 7px 30px 7px 12px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ec-select:hover {
+  border-color: #adb5bd;
+}
+
+.ec-select option {
+  background: #ffffff;
+  color: var(--text-dark);
+}
+
+.ec-select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+  font-size: 10px;
+}
+
+/* UPI / CASH toggle */
+.ec-toggle {
+  display: flex;
+  background: var(--toggle-wrap-bg);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.ec-toggle__btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: none;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--text-dim);
+}
+
+.ec-toggle__btn--active-upi {
+  background: var(--upi-pill-grad);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.35);
+}
+
+.ec-toggle__btn--active-cash {
+  background: var(--cash-pill-grad);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+/* ---------- Stats body ---------- */
+.ec-stats {
+  padding: 6px 0 2px;
+}
+
+/* ---------- Section (Year / Month) ---------- */
+.ec-section {
+  padding: 14px 20px 12px;
+}
+
+.ec-section--month {
+  padding: 14px 20px 18px;
+}
+
+.ec-section__heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ec-section__accent {
+  width: 3px;
+  height: 18px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.ec-section__accent--year  { background: var(--year-accent); }
+.ec-section__accent--month { background: var(--month-accent); }
+
+.ec-section__label {
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ---------- Stat Row (plain) ---------- */
+.ec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.ec-row__desc {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.ec-row__desc strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.ec-row__amount {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+}
+
+/* ---------- Highlighted Row (by payment mode) ---------- */
+.ec-highlight-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.ec-highlight-row--upi {
+  background: var(--upi-tint);
+  border: 1px solid var(--upi-border);
+}
+
+.ec-highlight-row--cash {
+  background: var(--cash-tint);
+  border: 1px solid var(--cash-border);
+}
+
+.ec-highlight-row__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ec-highlight-row__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+}
+
+.ec-highlight-row__icon--upi  { background: var(--upi-grad); }
+.ec-highlight-row__icon--cash { background: var(--cash-grad); }
+
+.ec-highlight-row__desc {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.ec-highlight-row__desc strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.ec-highlight-row__mode--upi  { color: var(--upi-text);  font-weight: 700; }
+.ec-highlight-row__mode--cash { color: var(--cash-text); font-weight: 700; }
+
+.ec-highlight-row__amount--upi {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--upi-text);
+  letter-spacing: -0.5px;
+}
+
+.ec-highlight-row__amount--cash {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cash-text);
+  letter-spacing: -0.5px;
+}
+
+/* ---------- Divider ---------- */
+.ec-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+  margin: 0 20px;
+}
+
+/* ---------- Footer ---------- */
+.ec-footer {
+  border-top: 1px solid var(--divider);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ec-footer__label {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.ec-footer__label span {
+  color: var(--text-muted);
+}
+
+.ec-progress-track {
+  height: 4px;
+  width: 100px;
+  border-radius: 99px;
+  background: #e9ecef;
+  overflow: hidden;
+}
+
+.ec-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.5s ease, background 0.3s ease;
+}
+
+.ec-progress-fill--upi  { background: var(--upi-bar); }
+.ec-progress-fill--cash { background: var(--cash-bar); }
+
+/* ---------- Hint ---------- */
+.ec-hint {
+  color: var(--text-faint);
+  font-size: 11px;
+  text-align: center;
+  margin-top: 14px;
+  letter-spacing: 0.3px;
+}
