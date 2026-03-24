@@ -4,7 +4,11 @@ import PaymentModePopup from "./FilterByPaymentMethodPop";
 import SumOfExpense from "./SumOfExpense";
 import axiosInstance from "../util/AxiosInstance";
 import { useDispatch } from "react-redux";
-import { setTotalExpenseByCurrentYear,setTotalExpenseByCurrentYearByPaymentModeUPI } from "../feature/slice/Slice";
+import {
+  setTotalExpenseByCurrentYear,
+  setTotalExpenseByCurrentYearByPaymentModeUPI,
+  setTotalExpenseByMonth,
+} from "../feature/slice/Slice";
 function FilterTotal() {
   const dispatch = useDispatch();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -39,16 +43,38 @@ function FilterTotal() {
       console.error("Error in fetching current year expense", error);
     }
 
-    const response = await axiosInstance.post(
-      "http://localhost:8081/totalexpensebyyearpaymentmode",
-      {
-        paymentMode: "UPI",
-        year: currentDate.getFullYear(),
-      },
-    );
+    try {
+      const response = await axiosInstance.post(
+        "http://localhost:8081/totalexpensebyyearpaymentmode",
+        {
+          paymentMode: "UPI",
+          year: currentDate.getFullYear(),
+        },
+      );
 
-    if (response.status == 200) {
-      dispatch(setTotalExpenseByCurrentYearByPaymentModeUPI(response.data.sum));
+      if (response.status == 200) {
+        dispatch(
+          setTotalExpenseByCurrentYearByPaymentModeUPI(response.data.sum),
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Error in fetching current year expense with paymentmode",
+        error,
+      );
+    }
+
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/totalexpensebymonth",{
+        month:currentDate.toLocaleString("en-US", { month: "long" }),
+        year:currentDate.getFullYear()
+      })
+      if (response.status==200){
+        dispatch(setTotalExpenseByMonth(response.data.sum));
+      }
+    }
+    catch(error){
+      console.error("Error in fetching total expense in month",error);
     }
   }
   return (

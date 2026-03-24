@@ -104,6 +104,7 @@ function SectionHeading({ accent, label }) {
 // ─── Main Component ──────────────────────────────────────────
 function SumOfExpense() {
   const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(currentDate.toLocaleString('en-US', { month: 'long' }));
 
   const totalExpenseByCurrentYear = useSelector(
     (state) => state.profile.totalExpenseByCurrentYear,
@@ -112,13 +113,16 @@ function SumOfExpense() {
   const totalExpenseByCurrentYearPaymentModeUPI = useSelector(
     (state) => state.profile.totalExpenseByCurrentYearPaymentModeUPI,
   );
-  const [selectedMonth, setSelectedMonth] = useState(
-    currentDate.toLocaleString("en-US", { month: "long" }),
+
+  const totalExpenseByCurrentMonth = useSelector(
+    (state) => state.profile.totalExpenseByMonth,
   );
   const [payMode, setPayMode] = useState(null);
 
   const [yearExpense, setYearExpense] = useState(0);
   const [yearExpenseByPaymentMode, setYearExpenseByPaymentMode] = useState(0);
+  const [monthExpense, setMonthExpense] = useState(0);
+  const [monthExpenseByMode, setMonthExpenseByMode] = useState(0);
   // Data lookup (swap these lines for your API responses)
   const yearData = mockYearData[selectedYear] || {};
   const monthData = (mockMonthData[selectedYear] || {})[selectedMonth] || {};
@@ -152,32 +156,51 @@ function SumOfExpense() {
 
   // Fetching the selected year expense with the payment mode
   async function yearlyExpenseByPaymentMode(paymentMode, year) {
-    console.log("Default Payment Mode is",paymentMode);
     setPayMode(paymentMode);
-    if (paymentMode === "UPI") {
-      // Pass the payment mode as UPI with year
+    try {
       const response = await axiosInstance.post(
         "http://localhost:8081/totalexpensebyyearpaymentmode",
-        {
-          paymentMode: paymentMode,
-          year: year,
-        },
+        { paymentMode, year },
       );
       if (response.status == 200) {
         setYearExpenseByPaymentMode(response.data.sum);
       }
-    } else if (paymentMode === "CASH") {
-      // Pass the payment mode as CASH with year
+    } catch (error) {
+      console.error("Error in total expense by year and payment mode", error);
+    }
+    // Also refresh monthly expense for the selected month with the new mode
+    await getMonthExpenseByMode(selectedMonth, paymentMode, year);
+  }
+
+  // Fetching the selected month expense filtered by payment mode
+  async function getMonthExpenseByMode(monthName, mode, year) {
+    try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebyyearpaymentmode",
+        "http://localhost:8081/totalexpensebymonthpaymentmode",
+        { month: monthName, paymentMode: mode, year },
+      );
+      if (response.status == 200) {
+        setMonthExpenseByMode(response.data.sum);
+      }
+    } catch (error) {
+      console.error("Error in fetching month expense by payment mode", error);
+    }
+  }
+
+  async function getMonthExpense(monthName, year) {
+    try {
+      const response = await axiosInstance.post(
+        "http://localhost:8081/totalexpensebymonth",
         {
-          paymentMode: paymentMode,
+          month: monthName,
           year: year,
         },
       );
       if (response.status == 200) {
-        setYearExpenseByPaymentMode(response.data.sum);
+        setMonthExpense(response.data.sum);
       }
+    } catch (error) {
+      console.error("Error in fetching month expense", error);
     }
   }
 
@@ -199,7 +222,11 @@ function SumOfExpense() {
               <select
                 className="ec-select"
                 value={selectedMonth}
-                onChange={(e) => setSelectedMonth(e.target.value)}
+                onChange={(e) => {
+                  const month = e.target.value;
+                  setSelectedMonth(month);
+                  getMonthExpense(selectedMonth, selectedYear);
+                }}
               >
                 {MONTHS.map((m) => (
                   <option key={m} value={m}>
@@ -290,7 +317,9 @@ function SumOfExpense() {
               <StatRow
                 label="Total Expense in"
                 highlight={selectedMonth}
-                amount={monthTotal}
+                amount={
+                  monthExpense === 0 ? totalExpenseByCurrentMonth : monthExpense
+                }
               />
 
               {payMode && (
@@ -298,7 +327,11 @@ function SumOfExpense() {
                   label="Total Expense in"
                   highlight={selectedMonth}
                   mode={payMode}
-                  amount={monthByMode}
+                  amount={
+                    monthExpenseByMode === 0
+                      ? totalExpenseByCurrentMonth
+                      : monthExpenseByMode
+                  }
                 />
               )}
             </div>
