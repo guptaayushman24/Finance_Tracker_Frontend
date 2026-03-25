@@ -1,9 +1,11 @@
 import { FaCog } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Offcanvas, Button, Form } from "react-bootstrap";
 import "../css/Setting.css"
 import axios from "axios";
 import axiosInstance from "../util/AxiosInstance";
+import { setTotalExpensebyCASH, setTotalExpenseByUPI, setTotalExpenseToady } from "../feature/slice/Slice";
+import { useDispatch, useSelector } from "react-redux";
 const ModuleHeader = () => {
   const [showSettings, setShowSettings] = useState(false);
 
@@ -15,6 +17,12 @@ const ModuleHeader = () => {
 
   const handleClose = () => setShowSettings(false);
   const handleShow = () => setShowSettings(true);
+
+  const dispatch = useDispatch();
+
+  const currentDayExpense = useSelector((state) => state.profile.totalExpenseToday);
+  const currentDayExpenseUPI = useSelector((state)=>state.profile.totalExpenseTodayByUPI);
+  const currentDayExpenseCASH = useSelector((state)=>state.profile.totalExpenseTodayByCASH);
 
   const allAvailableExpense = async () => {
     try {
@@ -69,15 +77,65 @@ const ModuleHeader = () => {
       console.error("Error in removing data"+" "+error);
     }
   }
+
+  const todayExpense = async()=>{
+    try{
+      const response = await axiosInstance.get("http://localhost:8081/totalexpennseoncurrentdate")
+      if (response.status==200){
+          console.log("Response is",response.data);
+          dispatch(setTotalExpenseToady(response.data.sum));
+      }
+    }
+    catch(error){
+      console.error("Error in fetching the current day expense"+" "+error);
+    }
+
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/totalexpennseoncurrentdatepaymentmode",{
+        "paymentMode":"UPI"
+      })
+      if (response.status==200){
+        dispatch(setTotalExpenseByUPI(response.data.sum));
+      }
+
+    }
+    catch(error){
+       console.error("Error in fetching the current day expense by UPI"+" "+error);
+    }
+
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/totalexpennseoncurrentdatepaymentmode",{
+        "paymentMode":"CASH"
+      })
+      if (response.status==200){
+        dispatch(setTotalExpensebyCASH(response.data.sum));
+      }
+    }
+    catch(error){
+      console.error("Error in fetching the current day expense by CASH"+" "+error);
+    }
+  }
+
+  useEffect(()=>{
+    todayExpense();
+  })
   return (
     <>
-      <div className="module-card-header d-flex justify-content-between align-items-center">
-        <h5 className="mb-0">Expense Management</h5>
+
+      <div className="today-expense">
+        <div className="today-expense-child">
+           <div className="today-expense-detail">Today's Expense:- ₹{currentDayExpense}</div>
+        <div className="today-expense-detail">Today's Expense By UPI:- ₹{currentDayExpenseUPI}</div>
+        <div className="today-expense-detail">Today's Expense By CASH ₹{currentDayExpenseCASH}</div>
+        </div>
+        <div className="module-card-header d-flex justify-content-between align-items-center">
+        <h5 className="mb-0">Expense Setting</h5>
 
         <FaCog
           className="settings-icon"
           onClick={handleShow}
         />
+      </div>
       </div>
 
       {/* Right Side Panel */}

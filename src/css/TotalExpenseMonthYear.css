@@ -1,57 +1,22 @@
-.expense-summary-card{
-  width: 100%;
-  max-width: 600px;
-  background: white;
-  border-radius: 18px;
-  padding: 30px;
-  border: 1px solid #2b2b2b;
-  color: white;
-  box-shadow: 0px 10px 30px rgba(0,0,0,0.4);
-}
+.expense-summary-card {
+  position: fixed;              /* KEY CHANGE */
+  top: 80px;
+  right: 20px;
 
-.expense-header h4{
-  font-size: 20px;
-  font-weight: 500;
-  color: #e5e5e5;
-}
+  width: 320px;                 /* smaller width */
+  max-width: none;
 
-.expense-main{
-  margin-top: 15px;
-}
+  background: white;          /* dark card (matches your colors) */
+  border-radius: 16px;
+  padding: 20px;
 
-.label{
-  color: #9ca3af;
-  font-size: 14px;
-}
+  border: 1px solid black;
+  color: #111827;
 
-.amount{
-  font-size: 42px;
-  font-weight: 700;
-  margin-top: 5px;
-  color: #22c55e;
-}
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+  z-index: 1000;
 
-.expense-divider{
-  margin: 20px 0;
-  border-top: 1px solid #2a2a2a;
-}
-
-.expense-month{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.expense-month p{
-  color: #9ca3af;
-}
-
-.expense-month h4{
-  color: #60a5fa;
-}
-
-.expense-summary-card{
-  position: relative;
+  animation: popupFade 0.25s ease;
 }
 
 .close-btn{
@@ -65,6 +30,68 @@
   font-weight: bold;
 }
 
-.close-btn:hover{
-  color: red;
+/* .expense-header{
+  display: block;
+} */
+.expense-main{
+  margin: 10px 0;
+}
+
+.expense-header-payment-mode{
+  display: block;
+}
+
+.expense-month-parent{
+  display: block;
+}
+
+.expense-month{
+  margin-bottom: 10px;
+}
+
+/* .expense-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.expense-row p{
+  margin: 0;
+  color: #374151;
+}
+
+.expense-row b{
+  margin: 0;
+} */
+
+.expense-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.expense-row p{
+  margin: 0;
+  color: #374151;
+  font-size: 14px;
+}
+
+.expense-row b{
+  margin: 0;
+  font-weight: 600;
+  color: #111827;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
