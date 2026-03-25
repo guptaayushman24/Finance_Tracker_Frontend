@@ -25,29 +25,9 @@ const YEARS = [2023, 2024, 2025, 2026];
 const currentDate = new Date();
 
 // ─── Mock Data (replace with your API calls) ─────────────────
-const mockYearData = {
-  2023: { total: 84200, UPI: 51000, CASH: 33200 },
-  2024: { total: 97500, UPI: 63000, CASH: 34500 },
-  2025: { total: 112300, UPI: 74800, CASH: 37500 },
-  2026: { total: 38900, UPI: 26100, CASH: 12800 },
-};
 
-const mockMonthData = {
-  2025: {
-    January: { total: 9200, UPI: 6100, CASH: 3100 },
-    February: { total: 8400, UPI: 5500, CASH: 2900 },
-    March: { total: 10100, UPI: 7000, CASH: 3100 },
-    April: { total: 9700, UPI: 6400, CASH: 3300 },
-    May: { total: 11200, UPI: 7800, CASH: 3400 },
-    June: { total: 9800, UPI: 6300, CASH: 3500 },
-    July: { total: 10500, UPI: 7100, CASH: 3400 },
-    August: { total: 8900, UPI: 5800, CASH: 3100 },
-    September: { total: 9300, UPI: 6000, CASH: 3300 },
-    October: { total: 10800, UPI: 7200, CASH: 3600 },
-    November: { total: 11600, UPI: 7900, CASH: 3700 },
-    December: { total: 12800, UPI: 8700, CASH: 4100 },
-  },
-};
+
+
 
 // ─── Helpers ─────────────────────────────────────────────────
 function formatINR(n) {
@@ -119,21 +99,21 @@ function SumOfExpense() {
   );
   const [payMode, setPayMode] = useState(null);
 
-  const [yearExpense, setYearExpense] = useState(0);
-  const [yearExpenseByPaymentMode, setYearExpenseByPaymentMode] = useState(0);
-  const [monthExpense, setMonthExpense] = useState(0);
-  const [monthExpenseByMode, setMonthExpenseByMode] = useState(0);
+  const [yearExpense, setYearExpense] = useState(null);
+  const [yearExpenseByPaymentMode, setYearExpenseByPaymentMode] = useState(null);
+  const [monthExpense, setMonthExpense] = useState(null);
+  const [monthExpenseByMode, setMonthExpenseByMode] = useState(null);
   // Data lookup (swap these lines for your API responses)
-  const yearData = mockYearData[selectedYear] || {};
-  const monthData = (mockMonthData[selectedYear] || {})[selectedMonth] || {};
+  
+ 
 
-  const yearTotal = yearData.total || 0;
-  const yearByMode = payMode ? yearData[payMode] || 0 : 0;
-  const monthTotal = monthData.total || 0;
-  const monthByMode = payMode ? monthData[payMode] || 0 : 0;
+  
+  
 
   const sharePercent =
-    payMode && yearTotal ? Math.round((yearByMode / yearTotal) * 100) : 0;
+    payMode && yearExpense ? Math.round((yearExpenseByPaymentMode / yearExpense) * 100) : 0;
+
+    
 
   const m = payMode ? payMode.toLowerCase() : ""; // "upi" | "cash"
 
@@ -157,6 +137,7 @@ function SumOfExpense() {
   // Fetching the selected year expense with the payment mode
   async function yearlyExpenseByPaymentMode(paymentMode, year) {
     setPayMode(paymentMode);
+    setYearExpenseByPaymentMode(null); // clear stale value immediately
     try {
       const response = await axiosInstance.post(
         "http://localhost:8081/totalexpensebyyearpaymentmode",
@@ -189,6 +170,8 @@ function SumOfExpense() {
 
   async function getMonthExpense(monthName, year) {
     try {
+      console.log("Month Name is",monthName);
+      console.log("Year is",year);
       const response = await axiosInstance.post(
         "http://localhost:8081/totalexpensebymonth",
         {
@@ -225,7 +208,7 @@ function SumOfExpense() {
                 onChange={(e) => {
                   const month = e.target.value;
                   setSelectedMonth(month);
-                  getMonthExpense(selectedMonth, selectedYear);
+                  getMonthExpense(month, selectedYear);
                 }}
               >
                 {MONTHS.map((m) => (
@@ -263,7 +246,11 @@ function SumOfExpense() {
                 onChange={(e) => {
                   const year = e.target.value;
                   setSelectedYear(year);
+                  setYearExpenseByPaymentMode(null);
+                  setMonthExpenseByMode(null);
                   getSelectedYearExpense(year);
+                  getMonthExpense(selectedMonth, year);
+                  if (payMode) yearlyExpenseByPaymentMode(payMode, year);
                 }}
               >
                 {YEARS.map((y) => (
@@ -286,7 +273,7 @@ function SumOfExpense() {
                 label="Total Expense in"
                 highlight={selectedYear}
                 amount={
-                  yearExpense === 0 ? totalExpenseByCurrentYear : yearExpense
+                  yearExpense === null ? totalExpenseByCurrentYear : yearExpense
                 }
               />
 
@@ -296,7 +283,7 @@ function SumOfExpense() {
                   highlight={selectedYear}
                   mode={payMode}
                   amount={
-                    yearExpenseByPaymentMode === 0
+                    yearExpenseByPaymentMode === null
                       ? totalExpenseByCurrentYearPaymentModeUPI
                       : yearExpenseByPaymentMode
                   }
@@ -318,7 +305,7 @@ function SumOfExpense() {
                 label="Total Expense in"
                 highlight={selectedMonth}
                 amount={
-                  monthExpense === 0 ? totalExpenseByCurrentMonth : monthExpense
+                  monthExpense === null ? totalExpenseByCurrentMonth : monthExpense
                 }
               />
 
@@ -328,7 +315,7 @@ function SumOfExpense() {
                   highlight={selectedMonth}
                   mode={payMode}
                   amount={
-                    monthExpenseByMode === 0
+                    monthExpenseByMode === null
                       ? totalExpenseByCurrentMonth
                       : monthExpenseByMode
                   }
