@@ -9,8 +9,13 @@ const AllExpenseByUser = () => {
   const paymentMethodFlag = useSelector(
     (state) => state.profile.paymentMethodFlag,
   );
+
+  const sortExpenseMethodFlag = useSelector(
+    (state) => state.profile.sortExpenseFlag,
+  )
  
   const userExpenseList = useSelector((state) => state.profile.userExpenseList);
+  const sortUserExpenseList = useSelector((state) => state.profile.userExpenseSortList);
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
@@ -51,10 +56,12 @@ const AllExpenseByUser = () => {
       {/* <ShowExpense userExpense={allUserExpense}></ShowExpense> */}
 
       {/* If paymentMethod flag is 1 then render the compoent ShowExpense by passing the allUserExpense */}
-      {paymentMethodFlag === 1   ? (
-        <ShowExpense userExpense={userExpenseList}></ShowExpense>
+      {paymentMethodFlag === 1 ? (
+        <ShowExpense userExpense={userExpenseList} />
+      ) : sortExpenseMethodFlag === 1 ? (
+        <ShowExpense userExpense={sortUserExpenseList} />
       ) : (
-        <ShowExpense userExpense={allUserExpense}></ShowExpense>
+        <ShowExpense userExpense={allUserExpense} />
       )}
     </>
   );

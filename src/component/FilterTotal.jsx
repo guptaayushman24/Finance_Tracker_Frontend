@@ -1,9 +1,11 @@
 import { Button, Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import PaymentModePopup from "./FilterByPaymentMethodPop";
+import SortPopup from "./SortPopup";
 import SumOfExpense from "./SumOfExpense";
 import axiosInstance from "../util/AxiosInstance";
 import { useDispatch } from "react-redux";
+import { setSortExpenseFlag } from "../feature/slice/Slice";
 import {
   setTotalExpenseByCurrentYear,
   setTotalExpenseByCurrentYearByPaymentModeUPI,
@@ -13,6 +15,7 @@ function FilterTotal() {
   const dispatch = useDispatch();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSumOfExpense, setShowSumOfExpense] = useState(false);
+  const [showSortModal, setShowSortModal] = useState(false);
 
   const currentDate = new Date();
 
@@ -25,6 +28,11 @@ function FilterTotal() {
   const handleClosePayment = () => {
     setShowPaymentModal(false);
   };
+
+  const setShowModalandSortFlag =()=>{
+    setShowSortModal(true);
+    dispatch(setSortExpenseFlag(1));
+  }
 
   async function setShowExpenseAndCalculateCurrentYearExpense() {
     setShowSumOfExpense(true);
@@ -100,10 +108,15 @@ function FilterTotal() {
         >
           Sum of Expense
         </Button>
-        <Button variant="outline-dark" className="expensemanagmentbtn">
+        <Button variant="outline-dark" className="expensemanagmentbtn" onClick={()=>setShowModalandSortFlag()}>
           Sort
         </Button>
       </div>
+
+       <SortPopup
+        show={showSortModal}
+        handleClose={() => setShowSortModal(false)}
+      /> 
 
       {/* render the popup when the flag is true */}
       <PaymentModePopup
