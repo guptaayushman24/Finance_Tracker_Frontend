@@ -18,7 +18,9 @@ export const profileSlice = createSlice({
     totalExpenseTodayByUPI:0, // These will store the total Expense of today by UPI
     totalExpenseTodayByCASH:0, // These will store the total Expense of today by CASH
     userExpenseSortList:[], // These will store the expense in the sorted manner
-    sortExpenseFlag:0 // These flag will get activated when the SortExpense button will trigger
+    sortExpenseFlag:0, // These flag will get activated when the SortExpense button will trigger
+    userMonthExpnse:[], // These list will store the monthly expense of the user
+    monthExpenseFlag:0 // These flag will get activated when user needs to the see the expense detail in the particular month
   },
   // Inside the reducer we have written the action
   reducers:{
@@ -70,6 +72,12 @@ export const profileSlice = createSlice({
     },
     setSortExpenseFlag:(state,action)=>{
       state.sortExpenseFlag = action.payload;
+    },
+    setUserMonthExpenseList:(state,action)=>{
+      state.userMonthExpnse = action.payload;
+    },
+    setMonthExpenseFlag:(state,action)=>{
+      state.monthExpenseFlag = action.payload;
     }
   }
 })
@@ -77,6 +85,6 @@ export const profileSlice = createSlice({
 
 // Action creators are generated for each reducer function
 
-export const {setProfileEmailAddress,setFirstName,setLastName,setPaymentMethodFlag,setUserExpenseList,setTotalExpenseByCurrentYear,setTotalExpenseByMonth,setTotalExpenseByCurrentYearByPaymentModeUPI,setTotalExpenseByCurrentYearByPaymentModeCASH,setTotalExpenseByCurrentMonthPaymentModeCASH,setTotalExpenseByCurrentMonthPaymentModeUPI,setTotalExpenseToady,setTotalExpenseByUPI,setTotalExpensebyCASH,setUserExpenseSortedList,setSortExpenseFlag} = profileSlice.actions;
+export const {setProfileEmailAddress,setFirstName,setLastName,setPaymentMethodFlag,setUserExpenseList,setTotalExpenseByCurrentYear,setTotalExpenseByMonth,setTotalExpenseByCurrentYearByPaymentModeUPI,setTotalExpenseByCurrentYearByPaymentModeCASH,setTotalExpenseByCurrentMonthPaymentModeCASH,setTotalExpenseByCurrentMonthPaymentModeUPI,setTotalExpenseToady,setTotalExpenseByUPI,setTotalExpensebyCASH,setUserExpenseSortedList,setSortExpenseFlag,setUserMonthExpenseList,setMonthExpenseFlag} = profileSlice.actions;
 
 export default profileSlice.reducer;

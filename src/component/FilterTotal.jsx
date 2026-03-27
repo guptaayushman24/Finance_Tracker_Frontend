@@ -5,7 +5,6 @@ import SortPopup from "./SortPopup";
 import SumOfExpense from "./SumOfExpense";
 import axiosInstance from "../util/AxiosInstance";
 import { useDispatch } from "react-redux";
-import { setSortExpenseFlag } from "../feature/slice/Slice";
 import {
   setTotalExpenseByCurrentYear,
   setTotalExpenseByCurrentYearByPaymentModeUPI,
@@ -30,8 +29,8 @@ function FilterTotal() {
   };
 
   const setShowModalandSortFlag =()=>{
+    console.log("Sort Button is clicked");
     setShowSortModal(true);
-    dispatch(setSortExpenseFlag(1));
   }
 
   async function setShowExpenseAndCalculateCurrentYearExpense() {

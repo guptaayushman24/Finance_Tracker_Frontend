@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserExpenseSortedList } from "../feature/slice/Slice";
+import { useDispatch } from "react-redux";
+import { setUserExpenseSortedList, setSortExpenseFlag } from "../feature/slice/Slice";
 import "../css/SortPopup.css";
 import axiosInstance from "../util/AxiosInstance";
 
@@ -9,14 +9,14 @@ const SORT_OPTIONS = [
   {
     value: "asc",
     title: "Lowest Expense First",
-    subtitle: "Sort by amount: ₹ Low → High",
+    subtitle: "Sort by Amount: ₹ Low → High",
     icon: "↑",
     key: "asc",
   },
   {
     value: "desc",
     title: "Highest Expense First",
-    subtitle: "Sort by amount: ₹ High → Low",
+    subtitle: "Sort by Amount: ₹ High → Low",
     icon: "↓",
     key: "desc",
   },
@@ -24,17 +24,12 @@ const SORT_OPTIONS = [
 
 const SortPopup = ({ show, handleClose }) => {
   const dispatch = useDispatch();
-  const userExpenseList = useSelector((state) => state.profile.userExpenseList);
   const [selected, setSelected] = useState(null);
 
-  const handleApply = async () => {
+  const handleApply = async (sortOrder) => {
     // Call the sort API
+    console.log("The sort order is",sortOrder);
     try {
-      if (selected === "asc") {
-        sortOrder = "asc";
-      } else if (selected === "desc") {
-        sortOrder = "desc";
-      }
       const response = await axiosInstance.post(
         "http://localhost:8081/sortexpense",
         {
@@ -43,8 +38,8 @@ const SortPopup = ({ show, handleClose }) => {
       );
 
       if (response.status === 200) {
-        // dispatch(setUserExpenseList(sorted));
         dispatch(setUserExpenseSortedList(response.data));
+        dispatch(setSortExpenseFlag(1));
         handleClose();
       }
     } catch (error) {
@@ -95,7 +90,7 @@ const SortPopup = ({ show, handleClose }) => {
         <Button
           variant="primary"
           className="sort-apply-btn"
-          onClick={handleApply}
+          onClick={()=>handleApply(selected)}
         >
           Apply
         </Button>
