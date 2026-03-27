@@ -29,12 +29,17 @@ const AllExpenseByUser = () => {
 
   const yearExpenseFlag = useSelector(
     (state) => state.profile.yearExpenseFlag,
+  );
+
+  const userDateFlag = useSelector(
+    (state) => state.profile.userDateFlag,
   )
 
   const userExpenseList = useSelector((state) => state.profile.userExpenseList);
   const sortUserExpenseList = useSelector((state) => state.profile.userExpenseSortList);
   const userMonthExpnse = useSelector((state)=>state.profile.userMonthExpnse);
   const userYearExpense = useSelector((state)=>state.profile.userYearExpense);
+  const userDateExpense = useSelector((state)=>state.profile.userDateExpense);
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
@@ -59,6 +64,7 @@ const AllExpenseByUser = () => {
     if (sortExpenseMethodFlag === 1) return { list: sortUserExpenseList, skipReverse: true };
     if (monthExpenseFlag ===1) return {list:userMonthExpnse,skipReverse: true}
     if (yearExpenseFlag===1) return {list:userYearExpense,skipReverse:true}
+    if (userDateFlag===1) return {list:userDateExpense,skipReverse:true}
     return { list: allUserExpense, skipReverse: false };
   };
 

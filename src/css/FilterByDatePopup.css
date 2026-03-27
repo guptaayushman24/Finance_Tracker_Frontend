@@ -1,0 +1,204 @@
+.filter-date-modal .modal-dialog {
+  max-width: 320px;
+}
+
+.filter-date-modal .modal-content {
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  border: none;
+  overflow: hidden;
+}
+
+.filter-date-modal .modal-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-date-modal .modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.filter-date-modal .modal-body {
+  padding: 14px 18px;
+}
+
+.filter-date-modal .modal-footer {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #f0f0f0;
+  gap: 8px;
+}
+
+/* Section labels */
+.filter-section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+/* Date row */
+.filter-date-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.filter-date-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-input-label {
+  font-size: 0.75rem;
+  color: #999;
+  margin-bottom: 0;
+}
+
+.filter-date-input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #2d2d2d;
+  outline: none;
+  transition: border-color 0.18s;
+  background: #fafafa;
+}
+
+.filter-date-input:focus {
+  border-color: #6c63ff;
+  background: #fff;
+}
+
+.filter-date-divider {
+  font-size: 0.9rem;
+  color: #bbb;
+  padding-bottom: 8px;
+  flex-shrink: 0;
+}
+
+/* Radio option rows */
+.filter-option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid #e8e8e8;
+  transition: all 0.18s ease;
+  margin-bottom: 6px;
+  user-select: none;
+}
+
+.filter-option-label:last-child {
+  margin-bottom: 0;
+}
+
+.filter-option-label:hover {
+  border-color: #6c63ff;
+  background-color: #f7f6ff;
+}
+
+.filter-option-label.selected {
+  border-color: #6c63ff;
+  background-color: #f0eeff;
+}
+
+/* Hide native radio */
+.filter-option-label input[type="radio"] {
+  display: none;
+}
+
+.filter-radio-custom {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s;
+}
+
+.filter-option-label.selected .filter-radio-custom {
+  border-color: #6c63ff;
+}
+
+.filter-radio-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6c63ff;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.18s ease;
+}
+
+.filter-option-label.selected .filter-radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.filter-option-icon {
+  font-size: 0.9rem;
+}
+
+.filter-option-text {
+  flex: 1;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: #2d2d2d;
+}
+
+.filter-option-label.selected .filter-option-text {
+  color: #6c63ff;
+}
+
+.filter-check {
+  font-size: 0.8rem;
+  color: #6c63ff;
+  font-weight: 700;
+}
+
+/* Footer buttons */
+.filter-cancel-btn {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.filter-apply-btn {
+  border-radius: 8px;
+  padding: 6px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: #6c63ff;
+  border-color: #6c63ff;
+}
+
+.filter-apply-btn:hover:not(:disabled) {
+  background: #5a52e0;
+  border-color: #5a52e0;
+}
+
+.filter-apply-btn:disabled {
+  background: #b0abf0;
+  border-color: #b0abf0;
+}
+
+@media (max-width: 576px) {
+  .filter-date-modal .modal-dialog {
+    max-width: 90vw;
+    margin: auto;
+  }
+}
