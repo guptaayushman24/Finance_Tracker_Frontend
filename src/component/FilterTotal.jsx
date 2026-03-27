@@ -2,6 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import PaymentModePopup from "./FilterByPaymentMethodPop";
 import SortPopup from "./SortPopup";
+import FilterByDatePopup from "./FilterByDatePopup";
 import SumOfExpense from "./SumOfExpense";
 import axiosInstance from "../util/AxiosInstance";
 import { useDispatch } from "react-redux";
@@ -15,6 +16,7 @@ function FilterTotal() {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSumOfExpense, setShowSumOfExpense] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
+  const [showFilterDateModal, setShowFilterDateModal] = useState(false);
 
   const currentDate = new Date();
 
@@ -90,7 +92,7 @@ function FilterTotal() {
         <h5>Filter and Total</h5>
       </div>
       <div className="module-header">
-        <Button variant="primary" className="expensemanagmentbtn">
+        <Button variant="primary" className="expensemanagmentbtn" onClick={() => setShowFilterDateModal(true)}>
           Filter By Date
         </Button>
         <Button
@@ -111,6 +113,12 @@ function FilterTotal() {
           Sort
         </Button>
       </div>
+
+      <FilterByDatePopup
+        show={showFilterDateModal}
+        handleClose={() => setShowFilterDateModal(false)}
+        onApply={(filters) => console.log("Filter applied:", filters)}
+      />
 
        <SortPopup
         show={showSortModal}
