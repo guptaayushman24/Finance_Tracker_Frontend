@@ -115,7 +115,7 @@ const MonthFilterPopup = ({ show, handleClose }) => {
             Showing expenses for{" "}
             <strong>
               {MONTHS.find((m) => m.value === selectedMonth)?.label}{" "}
-              {selectedYear}
+              {selectedYear} of {selectedMonth} month
             </strong>
           </p>
         )}
