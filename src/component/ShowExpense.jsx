@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import axiosInstance from "../util/AxiosInstance";
 function ShowExpense (props){
   const allUserExpense = props.userExpense;
+  const skipReverse = props.skipReverse || false;
   const deleteUserExpense = async (id) => {
     try {
       const response = await axiosInstance.post(
@@ -38,8 +39,7 @@ function ShowExpense (props){
           <tbody>
             {/* Mapping Expense which is fetched from API */}
             {allUserExpense && allUserExpense.length > 0 &&
-              [...allUserExpense]
-                .reverse()
+              (skipReverse ? [...allUserExpense] : [...allUserExpense].reverse())
                 .map((value, index) => (
                   <tr key={index}>
                     <td>{value.expenseType}</td>

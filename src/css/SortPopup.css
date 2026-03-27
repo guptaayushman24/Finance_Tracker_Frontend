@@ -1,0 +1,155 @@
+.sort-modal .modal-dialog {
+  max-width: 320px;
+}
+
+.sort-modal .modal-content {
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  border: none;
+  overflow: hidden;
+}
+
+.sort-modal .modal-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sort-modal .modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.sort-modal .modal-body {
+  padding: 14px 18px;
+}
+
+.sort-modal .modal-footer {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #f0f0f0;
+  gap: 8px;
+}
+
+/* Radio option rows */
+.sort-option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid #e8e8e8;
+  transition: all 0.18s ease;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.sort-option-label:last-child {
+  margin-bottom: 0;
+}
+
+.sort-option-label:hover {
+  border-color: #6c63ff;
+  background-color: #f7f6ff;
+}
+
+.sort-option-label.selected {
+  border-color: #6c63ff;
+  background-color: #f0eeff;
+}
+
+/* Hide native radio, show custom */
+.sort-option-label input[type="radio"] {
+  display: none;
+}
+
+.sort-radio-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s;
+}
+
+.sort-option-label.selected .sort-radio-custom {
+  border-color: #6c63ff;
+}
+
+.sort-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6c63ff;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.18s ease;
+}
+
+.sort-option-label.selected .sort-radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sort-option-text {
+  flex: 1;
+}
+
+.sort-option-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #2d2d2d;
+  line-height: 1.2;
+}
+
+.sort-option-subtitle {
+  font-size: 0.76rem;
+  color: #888;
+  margin-top: 1px;
+}
+
+.sort-option-label.selected .sort-option-title {
+  color: #6c63ff;
+}
+
+.sort-option-icon {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.sort-option-label.selected .sort-option-icon {
+  color: #6c63ff;
+}
+
+/* Footer buttons */
+.sort-cancel-btn {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sort-apply-btn {
+  border-radius: 8px;
+  padding: 6px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: #6c63ff;
+  border-color: #6c63ff;
+}
+
+.sort-apply-btn:hover {
+  background: #5a52e0;
+  border-color: #5a52e0;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .sort-modal .modal-dialog {
+    max-width: 90vw;
+    margin: auto;
+  }
+}
