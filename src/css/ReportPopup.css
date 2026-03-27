@@ -1,0 +1,205 @@
+/* Modal shell */
+.report-popup-modal .modal-dialog {
+  max-width: 320px;
+}
+
+.report-popup-modal .modal-content {
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  border: none;
+  overflow: hidden;
+}
+
+.report-popup-modal .modal-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.report-popup-modal .modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.report-popup-modal .modal-body {
+  padding: 16px 18px 10px;
+}
+
+.report-popup-modal .modal-footer {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #f0f0f0;
+  gap: 8px;
+}
+
+/* Error banner */
+.rp-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff4f4;
+  border: 1.5px solid #f5c2c2;
+  border-radius: 10px;
+  color: #c0392b;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 9px 12px;
+  margin-bottom: 14px;
+  animation: rp-banner-in 0.18s ease;
+}
+
+.rp-error-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+@keyframes rp-banner-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Year grid — 3 columns */
+.rp-year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.rp-year-chip {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 8px 12px;
+  border-radius: 12px;
+  border: 1.5px solid #e8e8e8;
+  background: #fafafa;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  gap: 5px;
+  line-height: 1;
+}
+
+.rp-year-chip:hover {
+  border-color: #e74c3c;
+  background: #fff6f6;
+  color: #e74c3c;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(231, 76, 60, 0.12);
+}
+
+.rp-year-chip.selected {
+  border-color: #e74c3c;
+  background: #fdecea;
+  color: #e74c3c;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(231, 76, 60, 0.2);
+}
+
+/* Small dot indicator inside selected chip */
+.rp-year-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e74c3c;
+  animation: rp-dot-pop 0.16s ease;
+}
+
+@keyframes rp-dot-pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Selection hint */
+.rp-selection-hint {
+  font-size: 0.76rem;
+  color: #888;
+  margin: 12px 0 0;
+  text-align: center;
+}
+
+.rp-selection-hint strong {
+  color: #e74c3c;
+}
+
+/* Footer buttons */
+.rp-cancel-btn {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.rp-send-btn {
+  border-radius: 8px;
+  padding: 6px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.rp-send-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Success state */
+.rp-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px 4px;
+  text-align: center;
+  gap: 10px;
+}
+
+.rp-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e8f8f0;
+  border: 2px solid #27ae60;
+  color: #27ae60;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  animation: rp-icon-pop 0.22s ease;
+}
+
+@keyframes rp-icon-pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.rp-success-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rp-success-email {
+  font-size: 0.82rem;
+  color: #e74c3c;
+  font-weight: 600;
+  background: #fdecea;
+  border-radius: 8px;
+  padding: 5px 12px;
+  margin: 0;
+  word-break: break-all;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .report-popup-modal .modal-dialog {
+    max-width: 92vw;
+    margin: auto;
+  }
+}
