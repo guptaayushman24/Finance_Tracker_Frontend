@@ -74,6 +74,13 @@ const MonthFilterPopup = ({ show, handleClose }) => {
       </Modal.Header>
 
       <Modal.Body>
+        {errorMsg && (
+          <div className="mf-error-banner">
+            <span className="mf-error-icon">&#9888;</span>
+            {errorMsg}
+          </div>
+        )}
+
         {/* Year selector */}
         <div className="mf-year-row">
           {YEARS.map((yr) => (
