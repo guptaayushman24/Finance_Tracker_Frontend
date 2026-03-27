@@ -6,11 +6,13 @@ import ShowExpense from "./ShowExpense";
 import MonthFilterPopup from "./MonthFilterPopup";
 import { useSelector } from "react-redux";
 import YearFilterPopup from "./YearFilterPopup";
+import CurrentDayFilterPopup from "./CurrentDayFilterPopup";
 
 const AllExpenseByUser = () => {
   const [allUserExpense, setAllUserExpense] = useState([]);
   const [showMonthFilter, setShowMonthFilter] = useState(false);
   const [showYearFilter,setShowYearFilter] = useState(false);
+  const [showCurrentDayFilter, setShowCurrentDayFilter] = useState(false);
   const [monthFilteredExpense, setMonthFilteredExpense] = useState(null);
   const [activeMonthLabel, setActiveMonthLabel] = useState(null);
   const [activeYearLabel,setActiveYearLabel] = useState(null);
@@ -77,7 +79,11 @@ const AllExpenseByUser = () => {
           <h5>Advance Detail</h5>
         </div>
         <div className="module-header">
-          <Button variant="primary" className="expensemanagmentbtn">
+          <Button
+            variant="primary"
+            className="expensemanagmentbtn"
+            onClick={() => setShowCurrentDayFilter(true)}
+          >
             Current Day
           </Button>
 
@@ -98,6 +104,11 @@ const AllExpenseByUser = () => {
           </Button>
         </div>
       </div>
+
+      <CurrentDayFilterPopup
+        show={showCurrentDayFilter}
+        handleClose={() => setShowCurrentDayFilter(false)}
+      />
 
       <MonthFilterPopup
         show={showMonthFilter}
