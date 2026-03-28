@@ -1,7 +1,37 @@
-import React from "react";
-import { Button } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Modal, Form } from "react-bootstrap";
+import axiosInstance from "../util/AxiosInstance";
 
 const Module2 = () => {
+  const [showYearModal, setShowYearModal] = useState(false);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 10 }, (_, i) => currentYear - i);
+
+  const downloadYearExcel = async() => {
+    console.log("Downloading Excel for year:", selectedYear);
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/yearexpenseexcel",{
+        year:selectedYear
+      }, { responseType: 'blob' })
+      if (response.status===200){
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `expenses_${selectedYear}.xlsx`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      }
+    }
+    catch(error){
+      console.error("Error in downloading the Excel for the"+" "+selectedYear);
+    }
+    setShowYearModal(false);
+  };
+
   return (
     <div className="module-card">
 
@@ -21,12 +51,48 @@ const Module2 = () => {
           <div className="m2-download-divider" />
           <div className="m2-download-btn-wrap">
             <span className="m2-download-label">Yearly Report</span>
-            <Button variant="warning" className="m2-download-btn m2-download-btn--year">
+            <Button
+              variant="warning"
+              className="m2-download-btn m2-download-btn--year"
+              onClick={() => setShowYearModal(true)}
+            >
               <span className="m2-btn-icon">&#8659;</span> Download Excel
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Year Selection Modal */}
+      <Modal
+        show={showYearModal}
+        onHide={() => setShowYearModal(false)}
+        centered
+        size="sm"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Select Year</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>Year</Form.Label>
+            <Form.Select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(Number(e.target.value))}
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" onClick={()=>downloadYearExcel(selectedYear)}>
+            <span className="m2-btn-icon">&#8659;</span> Download
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       {/* Charts Grid */}
       <div className="m2-charts-grid">
