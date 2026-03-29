@@ -234,7 +234,30 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+.m2-chart-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.m2-chart-select {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1.5px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.m2-chart-select:focus {
+  border-color: #6b7280;
 }
 
 .m2-chart-badge {
