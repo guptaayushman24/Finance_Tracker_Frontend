@@ -121,7 +121,7 @@ function SumOfExpense() {
   async function getSelectedYearExpense(year) {
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/totalexpensebyyear",
+        "https://userexpense-production.up.railway.app/totalexpensebyyear",
         {
           year: year,
         },
@@ -140,7 +140,7 @@ function SumOfExpense() {
     setYearExpenseByPaymentMode(null); // clear stale value immediately
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
+        "https://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
         { paymentMode, year },
       );
       if (response.status == 200) {
@@ -157,7 +157,7 @@ function SumOfExpense() {
   async function getMonthExpenseByMode(monthName, mode, year) {
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/totalexpensebymonthpaymentmode",
+        "https://userexpense-production.up.railway.app/totalexpensebymonthpaymentmode",
         { month: monthName, paymentMode: mode, year },
       );
       if (response.status == 200) {
@@ -173,7 +173,7 @@ function SumOfExpense() {
       console.log("Month Name is",monthName);
       console.log("Year is",year);
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/totalexpensebymonth",
+        "https://userexpense-production.up.railway.app/totalexpensebymonth",
         {
           month: monthName,
           year: year,

@@ -35,7 +35,7 @@ const MonthFilterPopup = ({ show, handleClose }) => {
     setErrorMsg(null);
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/userexpensebymonth",
+        "https://userexpense-production.up.railway.app/userexpensebymonth",
         {
           monthName: selectedMonth,
           year: selectedYear,

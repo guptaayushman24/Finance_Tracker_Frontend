@@ -16,7 +16,7 @@ const FilterByDatePopup = ({ show, handleClose, onApply }) => {
 
    const handleApply = async() => {
     try{
-      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/expenseOnday",{
+      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/expenseOnday",{
         localDate:fromDate,
         paymentMode:paymentMode===null? "" :paymentMode
       })

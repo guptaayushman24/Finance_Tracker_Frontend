@@ -57,7 +57,7 @@ function SigninComponent() {
       
       try {
         const response = await axios.post(
-          "http://comfortable-balance-production-4f82.up.railway.app/auth/signin",
+          "https://comfortable-balance-production-4f82.up.railway.app/auth/signin",
           {
             email: emailAddress,
             password: password,
@@ -75,7 +75,7 @@ function SigninComponent() {
       try {
         const token = localStorage.getItem("token");
         const response = await axiosInstance.post(
-          "http://comfortable-balance-production-4f82.up.railway.app/auth/profile",
+          "https://comfortable-balance-production-4f82.up.railway.app/auth/profile",
           {
             emailAddress: emailAddress,
           },

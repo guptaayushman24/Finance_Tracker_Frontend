@@ -27,7 +27,7 @@ const CurrentDayFilterPopup = ({ show, handleClose }) => {
     try {
       // TODO: Replace with your actual API endpoint and payload shape
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/toalexpenseondate",
+        "https://userexpense-production.up.railway.app/toalexpenseondate",
         {
           expenseDate: selectedDate,
           paymentMode: selectedMethod,

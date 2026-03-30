@@ -26,7 +26,7 @@ const ModuleHeader = () => {
 
   const allAvailableExpense = async () => {
     try {
-      const response = await axiosInstance.get("http://userexpense-production.up.railway.app/availableexpense");
+      const response = await axiosInstance.get("https://userexpense-production.up.railway.app/availableexpense");
       if (response.status == 200) {
         setAllExpense(response.data);
       }
@@ -38,7 +38,7 @@ const ModuleHeader = () => {
 
   const userExpense = async() =>{
     try{
-      const response = await axiosInstance.get("http://comfortable-balance-production-4f82.up.railway.app/auth/registeredexpensebyuser");
+      const response = await axiosInstance.get("https://comfortable-balance-production-4f82.up.railway.app/auth/registeredexpensebyuser");
     
     if (response.status==200){
       setUserRegisteredExpense(response.data);
@@ -51,7 +51,7 @@ const ModuleHeader = () => {
 
   const addNewExpenseCategory = async () =>{
     try{
-      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/addnewexpense",{
+      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/addnewexpense",{
          newUserExpense:newExpenseCategory
       })
       if (response.status==200){
@@ -66,7 +66,7 @@ const ModuleHeader = () => {
 
   const deleteUserExpenseCategory = async() => {
     try{
-      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/deleteexpense",{
+      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/deleteexpense",{
         expenseTobeDeleted:deleteExpenseCategory
       })
       if (response.status==200){
@@ -80,7 +80,7 @@ const ModuleHeader = () => {
 
   const todayExpense = async()=>{
     try{
-      const response = await axiosInstance.get("http://userexpense-production.up.railway.app/totalexpennseoncurrentdate")
+      const response = await axiosInstance.get("https://userexpense-production.up.railway.app/totalexpennseoncurrentdate")
       if (response.status==200){
           console.log("Response is",response.data);
           dispatch(setTotalExpenseToady(response.data.sum));
@@ -91,7 +91,7 @@ const ModuleHeader = () => {
     }
 
     try{
-      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/totalexpennseoncurrentdatepaymentmode",{
+      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/totalexpennseoncurrentdatepaymentmode",{
         "paymentMode":"UPI"
       })
       if (response.status==200){
@@ -104,7 +104,7 @@ const ModuleHeader = () => {
     }
 
     try{
-      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/totalexpennseoncurrentdatepaymentmode",{
+      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/totalexpennseoncurrentdatepaymentmode",{
         "paymentMode":"CASH"
       })
       if (response.status==200){

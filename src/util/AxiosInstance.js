@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://comfortable-balance-production-4f82.up.railway.app/auth/signin", // your backend base URL
+  baseURL: "https://comfortable-balance-production-4f82.up.railway.app/auth/signin", // your backend base URL
 });
 
 axiosInstance.interceptors.request.use(

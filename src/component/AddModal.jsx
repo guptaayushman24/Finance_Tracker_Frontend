@@ -33,7 +33,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
     setLoadingSaveExpense(true);
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/userexpense",
+        "https://userexpense-production.up.railway.app/userexpense",
         {
           expenseType: userregisterexpense,
           value: parseInt(amoumt),
@@ -54,7 +54,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
 
   const showUserExpense = async () => {
     const response = await axiosInstance.get(
-      "http://comfortable-balance-production-4f82.up.railway.app//auth/registeredexpensebyuser",
+      "https://comfortable-balance-production-4f82.up.railway.app//auth/registeredexpensebyuser",
     );
     if (response.status == 200) {
       setUserRegisteredExpense(response.data);

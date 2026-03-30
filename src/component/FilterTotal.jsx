@@ -40,7 +40,7 @@ function FilterTotal() {
     setShowSumOfExpense(true);
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/totalexpensebyyear",
+        "https://userexpense-production.up.railway.app/totalexpensebyyear",
         {
           year: currentDate.getFullYear(),
         },
@@ -55,7 +55,7 @@ function FilterTotal() {
 
     try {
       const response = await axiosInstance.post(
-        "http://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
+        "https://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
         {
           paymentMode: "UPI",
           year: currentDate.getFullYear(),
@@ -75,7 +75,7 @@ function FilterTotal() {
     }
 
     try{
-      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/totalexpensebymonth",{
+      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/totalexpensebymonth",{
         month:currentDate.toLocaleString("en-US", { month: "long" }),
         year:currentDate.getFullYear()
       })
