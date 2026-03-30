@@ -24,7 +24,7 @@ const PaymentModePopup = ({ show, handleClose }) => {
       // CALL the CASH
       setPaymentMode("CASH");
     }
-    const response = await axiosInstance.post("http://localhost:8081/filterbypaymentmode",{
+    const response = await axiosInstance.post("http://userexpense-production.up.railway.app/filterbypaymentmode",{
            paymentMode:paymentMode
         })
         if (response.status===200){

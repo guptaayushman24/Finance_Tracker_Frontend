@@ -26,7 +26,7 @@ const ModuleHeader = () => {
 
   const allAvailableExpense = async () => {
     try {
-      const response = await axiosInstance.get("http://localhost:8081/availableexpense");
+      const response = await axiosInstance.get("http://userexpense-production.up.railway.app/availableexpense");
       if (response.status == 200) {
         setAllExpense(response.data);
       }
@@ -38,7 +38,7 @@ const ModuleHeader = () => {
 
   const userExpense = async() =>{
     try{
-      const response = await axiosInstance.get("http://localhost:8080/auth/registeredexpensebyuser");
+      const response = await axiosInstance.get("http://comfortable-balance-production-4f82.up.railway.app/auth/registeredexpensebyuser");
     
     if (response.status==200){
       setUserRegisteredExpense(response.data);
@@ -51,7 +51,7 @@ const ModuleHeader = () => {
 
   const addNewExpenseCategory = async () =>{
     try{
-      const response = await axiosInstance.post("http://localhost:8081/addnewexpense",{
+      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/addnewexpense",{
          newUserExpense:newExpenseCategory
       })
       if (response.status==200){
@@ -66,7 +66,7 @@ const ModuleHeader = () => {
 
   const deleteUserExpenseCategory = async() => {
     try{
-      const response = await axiosInstance.post("http://localhost:8081/deleteexpense",{
+      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/deleteexpense",{
         expenseTobeDeleted:deleteExpenseCategory
       })
       if (response.status==200){
@@ -80,7 +80,7 @@ const ModuleHeader = () => {
 
   const todayExpense = async()=>{
     try{
-      const response = await axiosInstance.get("http://localhost:8081/totalexpennseoncurrentdate")
+      const response = await axiosInstance.get("http://userexpense-production.up.railway.app/totalexpennseoncurrentdate")
       if (response.status==200){
           console.log("Response is",response.data);
           dispatch(setTotalExpenseToady(response.data.sum));
@@ -91,7 +91,7 @@ const ModuleHeader = () => {
     }
 
     try{
-      const response = await axiosInstance.post("http://localhost:8081/totalexpennseoncurrentdatepaymentmode",{
+      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/totalexpennseoncurrentdatepaymentmode",{
         "paymentMode":"UPI"
       })
       if (response.status==200){
@@ -104,7 +104,7 @@ const ModuleHeader = () => {
     }
 
     try{
-      const response = await axiosInstance.post("http://localhost:8081/totalexpennseoncurrentdatepaymentmode",{
+      const response = await axiosInstance.post("http://userexpense-production.up.railway.app/totalexpennseoncurrentdatepaymentmode",{
         "paymentMode":"CASH"
       })
       if (response.status==200){
@@ -121,46 +121,21 @@ const ModuleHeader = () => {
   })
   return (
     <>
-      {/* Settings header row */}
-      <div className="et-settings-header">
-        <p className="et-settings-title">
-          <FaCalendarDay style={{ color: "#2563eb" }} />
-          Today's Overview
-        </p>
-        <FaCog className="settings-icon" onClick={handleShow} title="Expense Settings" />
+
+      <div className="today-expense">
+        <div className="today-expense-child">
+           <div className="today-expense-detail">Today's Expense:- ₹{currentDayExpense}</div>
+        <div className="today-expense-detail">Today's Expense By UPI:- ₹{currentDayExpenseUPI}</div>
+        <div className="today-expense-detail">Today's Expense By CASH ₹{currentDayExpenseCASH}</div>
+        </div>
+        <div className="module-card-header d-flex justify-content-between align-items-center">
+        <h5 className="mb-0">Expense Setting</h5>
+
+        <FaCog
+          className="settings-icon"
+          onClick={handleShow}
+        />
       </div>
-
-      {/* Stat Cards */}
-      <div className="et-stat-row">
-        <div className="et-stat-card">
-          <div className="et-stat-icon-wrap et-stat-icon-wrap--total">
-            <FaWallet />
-          </div>
-          <div>
-            <p className="et-stat-label">Total Today</p>
-            <p className="et-stat-amount">₹{currentDayExpense ?? 0}</p>
-          </div>
-        </div>
-
-        <div className="et-stat-card">
-          <div className="et-stat-icon-wrap et-stat-icon-wrap--upi">
-            <FaMobileAlt />
-          </div>
-          <div>
-            <p className="et-stat-label">UPI</p>
-            <p className="et-stat-amount">₹{currentDayExpenseUPI ?? 0}</p>
-          </div>
-        </div>
-
-        <div className="et-stat-card">
-          <div className="et-stat-icon-wrap et-stat-icon-wrap--cash">
-            <FaMoneyBillWave />
-          </div>
-          <div>
-            <p className="et-stat-label">Cash</p>
-            <p className="et-stat-amount">₹{currentDayExpenseCASH ?? 0}</p>
-          </div>
-        </div>
       </div>
 
       {/* Right Side Panel */}

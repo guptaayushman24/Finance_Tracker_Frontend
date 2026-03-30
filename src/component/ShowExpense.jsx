@@ -7,7 +7,7 @@ function ShowExpense (props){
   const deleteUserExpense = async (id) => {
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/deleteuserexpense",
+        "http://userexpense-production.up.railway.app/deleteuserexpense",
         { id }
       );
       if (response.status === 200) {
