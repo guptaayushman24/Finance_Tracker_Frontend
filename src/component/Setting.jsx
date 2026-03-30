@@ -1,4 +1,4 @@
-import { FaCog } from "react-icons/fa";
+import { FaCog, FaWallet, FaMobileAlt, FaMoneyBillWave, FaCalendarDay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Offcanvas, Button, Form } from "react-bootstrap";
 import "../css/Setting.css"
@@ -121,21 +121,46 @@ const ModuleHeader = () => {
   })
   return (
     <>
-
-      <div className="today-expense">
-        <div className="today-expense-child">
-           <div className="today-expense-detail">Today's Expense:- ₹{currentDayExpense}</div>
-        <div className="today-expense-detail">Today's Expense By UPI:- ₹{currentDayExpenseUPI}</div>
-        <div className="today-expense-detail">Today's Expense By CASH ₹{currentDayExpenseCASH}</div>
-        </div>
-        <div className="module-card-header d-flex justify-content-between align-items-center">
-        <h5 className="mb-0">Expense Setting</h5>
-
-        <FaCog
-          className="settings-icon"
-          onClick={handleShow}
-        />
+      {/* Settings header row */}
+      <div className="et-settings-header">
+        <p className="et-settings-title">
+          <FaCalendarDay style={{ color: "#2563eb" }} />
+          Today's Overview
+        </p>
+        <FaCog className="settings-icon" onClick={handleShow} title="Expense Settings" />
       </div>
+
+      {/* Stat Cards */}
+      <div className="et-stat-row">
+        <div className="et-stat-card">
+          <div className="et-stat-icon-wrap et-stat-icon-wrap--total">
+            <FaWallet />
+          </div>
+          <div>
+            <p className="et-stat-label">Total Today</p>
+            <p className="et-stat-amount">₹{currentDayExpense ?? 0}</p>
+          </div>
+        </div>
+
+        <div className="et-stat-card">
+          <div className="et-stat-icon-wrap et-stat-icon-wrap--upi">
+            <FaMobileAlt />
+          </div>
+          <div>
+            <p className="et-stat-label">UPI</p>
+            <p className="et-stat-amount">₹{currentDayExpenseUPI ?? 0}</p>
+          </div>
+        </div>
+
+        <div className="et-stat-card">
+          <div className="et-stat-icon-wrap et-stat-icon-wrap--cash">
+            <FaMoneyBillWave />
+          </div>
+          <div>
+            <p className="et-stat-label">Cash</p>
+            <p className="et-stat-amount">₹{currentDayExpenseCASH ?? 0}</p>
+          </div>
+        </div>
       </div>
 
       {/* Right Side Panel */}

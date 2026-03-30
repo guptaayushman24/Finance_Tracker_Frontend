@@ -1,6 +1,6 @@
 import axios, { all } from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { FaTable, FaCalendarDay, FaCalendarAlt, FaCalendar } from "react-icons/fa";
 import axiosInstance from "../util/AxiosInstance";
 import ShowExpense from "./ShowExpense";
 import MonthFilterPopup from "./MonthFilterPopup";
@@ -74,34 +74,38 @@ const AllExpenseByUser = () => {
 
   return (
     <>
-      <div className="module-header-parent">
-        <div>
-          <h5>Advance Detail</h5>
+      <div className="et-section-card">
+        <div className="et-section-header">
+          <div className="et-section-icon et-section-icon--green">
+            <FaTable />
+          </div>
+          <div>
+            <p className="et-section-title">Transaction History</p>
+            <p className="et-section-desc">Browse and filter all recorded expenses</p>
+          </div>
         </div>
-        <div className="module-header">
-          <Button
-            variant="primary"
-            className="expensemanagmentbtn"
+
+        <div className="et-btn-grid">
+          <button
+            className="et-action-btn et-action-btn--primary"
             onClick={() => setShowCurrentDayFilter(true)}
           >
-            Current Day
-          </Button>
+            <FaCalendarDay /> Sum Of Expense By Date
+          </button>
 
-          <Button
-            variant={activeMonthLabel ? "danger" : "outline-danger"}
-            className="expensemanagmentbtn"
+          <button
+            className={`et-action-btn ${activeMonthLabel ? "et-action-btn--active-month" : "et-action-btn--danger"}`}
             onClick={() => setShowMonthFilter(true)}
           >
-            {activeMonthLabel ? `${activeMonthLabel} ✕` : "Month"}
-          </Button>
+            <FaCalendarAlt /> {activeMonthLabel ? `${activeMonthLabel} ✕` : "Month"}
+          </button>
 
-          <Button
-           variant={activeYearLabel ? "danger" : "outline-danger"}
-           className="expensemanagmentbtn"
-           onClick={()=>setShowYearFilter(true)}
+          <button
+            className={`et-action-btn ${activeYearLabel ? "et-action-btn--active-month" : "et-action-btn--violet"}`}
+            onClick={() => setShowYearFilter(true)}
           >
-            Year
-          </Button>
+            <FaCalendar /> Year
+          </button>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { FaPlus, FaChartPie, FaWallet } from "react-icons/fa";
 import AddExpenseModal from "./AddModal";
 import Setting from "./Setting";
 import AllExpenseByUser from "./AllExpenseByUser";
@@ -129,55 +129,53 @@ const Module1 = () => {
   };
   return (
     <div className="module-card">
-      {/* Setting icon */}
-      <Setting></Setting>
-      {/* HEADER */}
-      <div className="module-header-parent">
-        <div>
-          <h5>Expense Managment</h5>
-        </div>
-        <div className="module-header">
-          <Button variant="primary" onClick={addExpense}>
-            Add Expense
-          </Button>
-          {showModal ? (
-            <AddExpenseModal
-              show={showModal}
-              handleClose={() => setShowModal(false)}
-            />
-          ) : null}
+      {/* Today's stats + settings */}
+      <div className="et-section-card">
+        <Setting />
+      </div>
 
-          <Button
-            variant={activeYearLabel ? "danger" : "outline-danger"}
-            className="expensemanagmentbtn"
+      {/* Page Banner */}
+      <div className="et-page-banner">
+        <div className="et-banner-left">
+          <h1 className="et-banner-title">Expense Management</h1>
+          <p className="et-banner-subtitle">Track, analyse and manage all your expenses in one place</p>
+        </div>
+
+        <div className="et-banner-actions">
+          <button className="et-banner-btn et-banner-btn--add" onClick={addExpense}>
+            <FaPlus /> Add Expense
+          </button>
+
+          <button
+            className="et-banner-btn et-banner-btn--report"
             onClick={() => setShowReportPopup(true)}
           >
-            Report
-          </Button>
+            <FaChartPie /> Report
+          </button>
 
-          <ReportPopup
-            show={showReportPopup}
-            handleClose={() => setShowReportPopup(false)}
-          />
-
-          <Button variant="outline-success" onClick={showTotalExpense}>
-            Total Expense
-          </Button>
-
-          {totalExpensePopUp ? (
-            <TotalExpenseMonthYear
-              show={setTotalExpensePopUp}
-              handleClose={() => setTotalExpensePopUp(false)}
-            ></TotalExpenseMonthYear>
-          ) : null}
+          <button className="et-banner-btn et-banner-btn--total" onClick={showTotalExpense}>
+            <FaWallet /> Total Expense
+          </button>
         </div>
       </div>
 
-      {/* FILTER ROW */}
-      <FilterTotal></FilterTotal>
+      {/* Modals */}
+      {showModal && (
+        <AddExpenseModal show={showModal} handleClose={() => setShowModal(false)} />
+      )}
+      <ReportPopup show={showReportPopup} handleClose={() => setShowReportPopup(false)} />
+      {totalExpensePopUp && (
+        <TotalExpenseMonthYear
+          show={setTotalExpensePopUp}
+          handleClose={() => setTotalExpensePopUp(false)}
+        />
+      )}
 
-      {/* ADVANCE DETAIL */}
-      <AllExpenseByUser></AllExpenseByUser>
+      {/* Filter & Analytics */}
+      <FilterTotal />
+
+      {/* Transaction History */}
+      <AllExpenseByUser />
     </div>
   );
 };

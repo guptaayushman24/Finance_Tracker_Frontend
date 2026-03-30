@@ -1,5 +1,6 @@
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import React, { useState } from "react";
+import { FaFilter, FaCreditCard, FaCalculator, FaSortAmountDown, FaCalendarAlt } from "react-icons/fa";
 import PaymentModePopup from "./FilterByPaymentMethodPop";
 import SortPopup from "./SortPopup";
 import FilterByDatePopup from "./FilterByDatePopup";
@@ -87,31 +88,34 @@ function FilterTotal() {
     }
   }
   return (
-    <div className="module-header-parent">
-      <div>
-        <h5>Filter and Total</h5>
+    <div className="et-section-card">
+      <div className="et-section-header">
+        <div className="et-section-icon et-section-icon--purple">
+          <FaFilter />
+        </div>
+        <div>
+          <p className="et-section-title">Filter &amp; Analytics</p>
+          <p className="et-section-desc">Narrow down expenses by date, payment mode or amount</p>
+        </div>
       </div>
-      <div className="module-header">
-        <Button variant="primary" className="expensemanagmentbtn" onClick={() => setShowFilterDateModal(true)}>
-          Filter By Date
-        </Button>
-        <Button
-          variant="outline-danger"
-          className="expensemanagmentbtn"
-          onClick={handleShowPayment}
-        >
-          Payment Method
-        </Button>
-        <Button
-          variant="outline-success"
-          className="expensemanagmentbtn"
-          onClick={() => setShowExpenseAndCalculateCurrentYearExpense()}
-        >
-          Sum of Expense
-        </Button>
-        <Button variant="outline-dark" className="expensemanagmentbtn" onClick={()=>setShowModalandSortFlag()}>
-          Sort
-        </Button>
+
+      <div className="et-btn-grid">
+
+        <button className="et-action-btn et-action-btn--primary" onClick={() => setShowFilterDateModal(true)}>
+          <FaCalendarAlt /> Filter By Date
+        </button>
+
+        <button className="et-action-btn et-action-btn--danger" onClick={handleShowPayment}>
+          <FaCreditCard /> Payment Method
+        </button>
+
+        <button className="et-action-btn et-action-btn--success" onClick={() => setShowExpenseAndCalculateCurrentYearExpense()}>
+          <FaCalculator /> Sum of Expense
+        </button>
+
+        <button className="et-action-btn et-action-btn--dark" onClick={() => setShowModalandSortFlag()}>
+          <FaSortAmountDown /> Sort
+        </button>
       </div>
 
       <FilterByDatePopup
@@ -120,29 +124,19 @@ function FilterTotal() {
         onApply={(filters) => console.log("Filter applied:", filters)}
       />
 
-       <SortPopup
+      <SortPopup
         show={showSortModal}
         handleClose={() => setShowSortModal(false)}
-      /> 
+      />
 
-      {/* render the popup when the flag is true */}
       <PaymentModePopup
         show={showPaymentModal}
         handleClose={handleClosePayment}
       />
 
-      <Modal
-        show={showSumOfExpense}
-        onHide={() => setShowSumOfExpense(false)}
-        centered
-      >
-        <Modal.Header
-          closeButton
-          style={{ background: "#f8f9fa", borderBottom: "1px solid #e9ecef" }}
-        >
-          <Modal.Title style={{ fontSize: "16px", fontWeight: 600 }}>
-            Sum of Expense
-          </Modal.Title>
+      <Modal show={showSumOfExpense} onHide={() => setShowSumOfExpense(false)} centered>
+        <Modal.Header closeButton style={{ background: "#f8f9fa", borderBottom: "1px solid #e9ecef" }}>
+          <Modal.Title style={{ fontSize: "16px", fontWeight: 600 }}>Sum of Expense</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ padding: 0 }}>
           <SumOfExpense />
