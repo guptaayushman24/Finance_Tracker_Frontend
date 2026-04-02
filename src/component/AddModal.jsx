@@ -54,7 +54,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
 
   const showUserExpense = async () => {
     const response = await axiosInstance.get(
-      "https://comfortable-balance-production-4f82.up.railway.app//auth/registeredexpensebyuser",
+      "https://financetrackerai-production.up.railway.app//auth/registeredexpensebyuser",
     );
     if (response.status == 200) {
       setUserRegisteredExpense(response.data);

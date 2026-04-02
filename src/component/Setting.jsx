@@ -38,7 +38,7 @@ const ModuleHeader = () => {
 
   const userExpense = async() =>{
     try{
-      const response = await axiosInstance.get("https://comfortable-balance-production-4f82.up.railway.app/auth/registeredexpensebyuser");
+      const response = await axiosInstance.get("https://financetrackerai-production.up.railway.app/auth/registeredexpensebyuser");
     
     if (response.status==200){
       setUserRegisteredExpense(response.data);

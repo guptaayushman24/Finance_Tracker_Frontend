@@ -97,7 +97,7 @@ function SignupComponent() {
       !errorEmailAddress
     ) {
       await axios
-        .post("https://comfortable-balance-production-4f82.up.railway.app/auth/signup", {
+        .post("https://financetrackerai-production.up.railway.app/auth/signup", {
           firstName: firstName,
           lastName: secondName,
           emailAddress: emailAddress,
