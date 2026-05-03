@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "../component/SideBar";
 import Module1 from "../component/Module1";
 import Module2 from "../component/Module2";
+import Chatbot from "../component/Chatbot";
 import "../css/dashboard.css"
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState("module1");
@@ -14,6 +15,8 @@ const Dashboard = () => {
         {activeModule === "module1" && <Module1 />}
         {activeModule === "module2" && <Module2 />}
       </div>
+
+      <Chatbot />
     </div>
   );
 };
