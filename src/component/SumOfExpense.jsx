@@ -121,7 +121,7 @@ function SumOfExpense() {
   async function getSelectedYearExpense(year) {
     try {
       const response = await axiosInstance.post(
-        "https://userexpense-production.up.railway.app/totalexpensebyyear",
+        "http://localhost:8081/totalexpensebyyear",
         {
           year: year,
         },
@@ -140,7 +140,7 @@ function SumOfExpense() {
     setYearExpenseByPaymentMode(null); // clear stale value immediately
     try {
       const response = await axiosInstance.post(
-        "https://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
+        "http://localhost:8081/totalexpensebyyearpaymentmode",
         { paymentMode, year },
       );
       if (response.status == 200) {
@@ -157,7 +157,7 @@ function SumOfExpense() {
   async function getMonthExpenseByMode(monthName, mode, year) {
     try {
       const response = await axiosInstance.post(
-        "https://userexpense-production.up.railway.app/totalexpensebymonthpaymentmode",
+        "http://localhost:8081/totalexpensebymonthpaymentmode",
         { month: monthName, paymentMode: mode, year },
       );
       if (response.status == 200) {
@@ -173,7 +173,7 @@ function SumOfExpense() {
       console.log("Month Name is",monthName);
       console.log("Year is",year);
       const response = await axiosInstance.post(
-        "https://userexpense-production.up.railway.app/totalexpensebymonth",
+        "http://localhost:8081/totalexpensebymonth",
         {
           month: monthName,
           year: year,
@@ -339,9 +339,6 @@ function SumOfExpense() {
             </div>
           )}
         </div>
-
-        {/* Hint */}
-        <p className="ec-hint">Replace mock data with your API calls</p>
       </div>
     </div>
   );

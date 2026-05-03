@@ -31,7 +31,7 @@ const SortPopup = ({ show, handleClose }) => {
     console.log("The sort order is",sortOrder);
     try {
       const response = await axiosInstance.post(
-        "https://userexpense-production.up.railway.app/sortexpense",
+        "http://localhost:8081/sortexpense",
         {
           sortOrder: sortOrder,
         },

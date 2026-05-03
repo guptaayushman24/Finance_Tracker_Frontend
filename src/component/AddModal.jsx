@@ -33,7 +33,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
     setLoadingSaveExpense(true);
     try {
       const response = await axiosInstance.post(
-        "https://userexpense-production.up.railway.app/userexpense",
+        "http://localhost:8081/userexpense",
         {
           expenseType: userregisterexpense,
           value: parseInt(amoumt),
@@ -54,7 +54,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
 
   const showUserExpense = async () => {
     const response = await axiosInstance.get(
-      "https://financetrackerai-production.up.railway.app/auth/registeredexpensebyuser",
+      "http://localhost:8080/auth/registeredexpensebyuser",
     );
     if (response.status == 200) {
       setUserRegisteredExpense(response.data);

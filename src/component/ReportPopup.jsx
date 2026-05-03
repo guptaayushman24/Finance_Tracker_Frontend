@@ -17,7 +17,7 @@ const ReportPopup = ({ show, handleClose }) => {
     if (!selectedYear) return;
     setErrorMsg(null);
     try {
-      const response = await axiosInstance.post("https://userexpense-production.up.railway.app/expenseanalyzer", {
+      const response = await axiosInstance.post("http://localhost:8081/expenseanalyzer", {
         year: selectedYear,
       });
 

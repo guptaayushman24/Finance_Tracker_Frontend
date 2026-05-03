@@ -14,6 +14,8 @@ body {
   background: #1f2937;
   color: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
@@ -39,6 +41,33 @@ body {
 .sidebar-btn.active {
   background: #2563eb;
   color: white;
+}
+
+.sidebar-spacer {
+  flex: 1;
+}
+
+.sidebar-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1.5px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  margin-top: 8px;
+}
+
+.sidebar-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.55);
 }
 
 /* Content */

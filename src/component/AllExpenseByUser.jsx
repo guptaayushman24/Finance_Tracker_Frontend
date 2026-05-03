@@ -45,7 +45,7 @@ const AllExpenseByUser = () => {
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
-        "https://userexpense-production.up.railway.app/allexpense",
+        "http://localhost:8081/allexpense",
       );
       if (response.status === 200) {
         console.table(response.data);

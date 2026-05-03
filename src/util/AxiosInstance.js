@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://financetrackerai-production.up.railway.app/auth/signin", // your backend base URL
+  baseURL: "http://localhost:8080/auth/signin", // your backend base URL
 });
 
 axiosInstance.interceptors.request.use(

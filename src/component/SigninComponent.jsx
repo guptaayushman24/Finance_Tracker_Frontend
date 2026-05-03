@@ -57,7 +57,7 @@ function SigninComponent() {
       
       try {
         const response = await axios.post(
-          "https://financetrackerai-production.up.railway.app/auth/signin",
+          "http://localhost:8080/auth/signin",
           {
             email: emailAddress,
             password: password,
@@ -75,7 +75,7 @@ function SigninComponent() {
       try {
         const token = localStorage.getItem("token");
         const response = await axiosInstance.post(
-          "https://financetrackerai-production.up.railway.app/auth/profile",
+          "http://localhost:8080/auth/profile",
           {
             emailAddress: emailAddress,
           },

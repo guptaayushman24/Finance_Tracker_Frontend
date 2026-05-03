@@ -36,7 +36,7 @@ function SignupComponent() {
   useEffect(() => {
     // Replace with your real API
     const allExpenseResponse = axios.get(
-      "https://userexpense-production.up.railway.app/availableexpense",
+      "http://localhost:8081/availableexpense",
     );
     setAllExpense(allExpenseResponse.data);
     const fetchExpenses = async () => {
@@ -97,7 +97,7 @@ function SignupComponent() {
       !errorEmailAddress
     ) {
       await axios
-        .post("https://financetrackerai-production.up.railway.app/auth/signup", {
+        .post("http://localhost:8080/auth/signup", {
           firstName: firstName,
           lastName: secondName,
           emailAddress: emailAddress,

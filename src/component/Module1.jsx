@@ -32,7 +32,7 @@ const Module1 = () => {
     setTotalExpensePopUp(true);
     // Call the API of Total Expense
     const response = await axiosInstance.post(
-      "https://userexpense-production.up.railway.app/totalexpensebyyear",
+      "http://localhost:8081/totalexpensebyyear",
       {
         year: currentDate.getFullYear(), // Current Year
       },
@@ -44,7 +44,7 @@ const Module1 = () => {
 
     // Call the API of Total Expense By Month
     const responseByMonth = await axiosInstance.post(
-      "https://userexpense-production.up.railway.app/totalexpensebymonth",
+      "http://localhost:8081/totalexpensebymonth",
       {
         month: currentDate.toLocaleString("en-US", { month: "long" }),
         year: currentDate.getFullYear(),
@@ -56,7 +56,7 @@ const Module1 = () => {
 
     // Call the API of Current Year By Payment Method for UPI
     const responseByCurrentYearByUPI = await axiosInstance.post(
-      "https://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
+      "http://localhost:8081/totalexpensebyyearpaymentmode",
       {
         year: currentDate.getFullYear(),
         paymentMode: "UPI",
@@ -73,7 +73,7 @@ const Module1 = () => {
 
     // Call the API of Current Year By Payment Method for CASH
     const responseByCurrentYearByCash = await axiosInstance.post(
-      "https://userexpense-production.up.railway.app/totalexpensebyyearpaymentmode",
+      "http://localhost:8081/totalexpensebyyearpaymentmode",
       {
         year: currentDate.getFullYear(),
         paymentMode: "CASH",
@@ -91,7 +91,7 @@ const Module1 = () => {
 
     // Call the API of Current Month By Payment Method for UPI
     const responseInCurrentMonthByUPI = await axiosInstance.post(
-      "https://userexpense-production.up.railway.app/totalexpensebymonthpaymentmode",
+      "http://localhost:8081/totalexpensebymonthpaymentmode",
       {
         month: currentDate.toLocaleString("en-US", { month: "long" }),
         paymentMode: "UPI",
@@ -110,7 +110,7 @@ const Module1 = () => {
 
     // Call the API of Current Month By Payment Mode for CASH
     const responseInCurrentMonthByCASH = await axiosInstance.post(
-      "https://userexpense-production.up.railway.app/totalexpensebymonthpaymentmode",
+      "http://localhost:8081/totalexpensebymonthpaymentmode",
       {
         month: currentDate.toLocaleString("en-US", { month: "long" }),
         paymentMode: "CASH",
