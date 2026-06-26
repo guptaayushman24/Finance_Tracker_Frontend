@@ -1,0 +1,169 @@
+.scheduler-modal .modal-dialog {
+  max-width: 320px;
+}
+
+.scheduler-modal .modal-content {
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  border: none;
+  overflow: hidden;
+}
+
+.scheduler-modal .modal-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.scheduler-modal .modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.scheduler-modal .modal-body {
+  padding: 14px 18px;
+}
+
+.scheduler-modal .modal-footer {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #f0f0f0;
+  gap: 8px;
+}
+
+/* Radio option rows */
+.scheduler-option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid #e8e8e8;
+  transition: all 0.18s ease;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.scheduler-option-label:last-child {
+  margin-bottom: 0;
+}
+
+.scheduler-option-label:hover {
+  border-color: #6c63ff;
+  background-color: #f7f6ff;
+}
+
+.scheduler-option-label.selected {
+  border-color: #6c63ff;
+  background-color: #f0eeff;
+}
+
+/* Hide native radio, show custom */
+.scheduler-option-label input[type="radio"] {
+  display: none;
+}
+
+.scheduler-radio-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s;
+}
+
+.scheduler-option-label.selected .scheduler-radio-custom {
+  border-color: #6c63ff;
+}
+
+.scheduler-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6c63ff;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.18s ease;
+}
+
+.scheduler-option-label.selected .scheduler-radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scheduler-option-text {
+  flex: 1;
+}
+
+.scheduler-option-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #2d2d2d;
+  line-height: 1.2;
+}
+
+.scheduler-option-subtitle {
+  font-size: 0.76rem;
+  color: #888;
+  margin-top: 1px;
+}
+
+.scheduler-option-label.selected .scheduler-option-title {
+  color: #6c63ff;
+}
+
+.scheduler-option-icon {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #aaa;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+}
+
+.scheduler-option-label.selected .scheduler-option-icon {
+  color: #6c63ff;
+  background: #e6e3ff;
+}
+
+/* Footer buttons */
+.scheduler-cancel-btn {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.scheduler-apply-btn {
+  border-radius: 8px;
+  padding: 6px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: #6c63ff;
+  border-color: #6c63ff;
+}
+
+.scheduler-apply-btn:hover {
+  background: #5a52e0;
+  border-color: #5a52e0;
+}
+
+.scheduler-apply-btn:disabled {
+  background: #b3aef5;
+  border-color: #b3aef5;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .scheduler-modal .modal-dialog {
+    max-width: 90vw;
+    margin: auto;
+  }
+}

@@ -6,8 +6,10 @@ import axios from "axios";
 import axiosInstance from "../util/AxiosInstance";
 import { setTotalExpensebyCASH, setTotalExpenseByUPI, setTotalExpenseToady } from "../feature/slice/Slice";
 import { useDispatch, useSelector } from "react-redux";
+import SchedulerPopup from "./SchedulerPopup";
 const ModuleHeader = () => {
   const [showSettings, setShowSettings] = useState(false);
+  const [showScheduler, setShowScheduler] = useState(false);
 
   const [allExpense, setAllExpense] = useState([]);
   const [userRegisteredExpense,setUserRegisteredExpense] = useState([]);
@@ -75,6 +77,19 @@ const ModuleHeader = () => {
     }
     catch(error){
       console.error("Error in removing data"+" "+error);
+    }
+  }
+
+  const deleteScheduler = async() => {
+    try{
+      const response = await axiosInstance.post("http://localhost:8081/deletescheduler")
+      if (response.status==200){
+        alert(response.data?.message || "Scheduler removed successfully");
+      }
+    }
+    catch(error){
+      alert(error.response?.data?.message || "Error in removing the scheduler");
+      console.error("Error in removing the scheduler"+" "+error);
     }
   }
 
@@ -195,8 +210,27 @@ const ModuleHeader = () => {
             </Button>
           </div>
 
+          <hr />
+
+          {/* Scheduler */}
+          <div>
+            <h6>Expense Scheduler</h6>
+            <Button variant="outline-primary" className="w-100"
+              onClick={() => setShowScheduler(true)}
+            >
+              Configure Scheduler
+            </Button>
+            <Button variant="danger" className="w-100 mt-2"
+              onClick={deleteScheduler}
+            >
+              Delete Scheduler
+            </Button>
+          </div>
+
         </Offcanvas.Body>
       </Offcanvas>
+
+      <SchedulerPopup show={showScheduler} handleClose={() => setShowScheduler(false)} />
     </>
   );
 };
