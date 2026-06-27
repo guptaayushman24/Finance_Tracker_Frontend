@@ -1,3 +1,4 @@
+import { AUTH_BASE_URL } from "../config/api";
 import React, { useState } from "react";
 import "../css/OTP.css";
 import axios from "axios";
@@ -11,7 +12,7 @@ const OTPPage = () => {
   const sendOTP = async () => {
     // Setting OTP in the state
     try {
-      const response = await axios.post("http://localhost:8080/generateotp", {
+      const response = await axios.post(`${AUTH_BASE_URL}/generateotp`, {
         emailAddress: emailAddress,
       });
       if (response.status == 200) {
@@ -28,14 +29,14 @@ const OTPPage = () => {
       for (let i = 0; i < storeOtp.length; i++) {
         enteredOTP = enteredOTP + storeOtp[i];
       }
-      const response = await axios.post("http://localhost:8080/validateotp", {
+      const response = await axios.post(`${AUTH_BASE_URL}/validateotp`, {
         emailAddress: emailAddress,
         otp: parseInt(enteredOTP),
       });
       if (response.status == 200) {
         if (response.data.status == 1) {
           alert("OTP Validated");
-          const response = await axios.post("http://localhost:8080/deleteotp", {
+          const response = await axios.post(`${AUTH_BASE_URL}/deleteotp`, {
             emailAddress: emailAddress,
           });
           if (response.status == 200) {
@@ -69,7 +70,7 @@ const OTPPage = () => {
   };
 
   const resetPassword = async () => {
-    const response = await axios.post("http://localhost:8080/resetpassword", {
+    const response = await axios.post(`${AUTH_BASE_URL}/resetpassword`, {
       emailAddress: emailAddress,
       newPassword: newPassword,
     });

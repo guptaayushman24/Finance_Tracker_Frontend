@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -31,7 +32,7 @@ const SortPopup = ({ show, handleClose }) => {
     console.log("The sort order is",sortOrder);
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/sortexpense",
+        `${EXPENSE_BASE_URL}/sortexpense`,
         {
           sortOrder: sortOrder,
         },

@@ -1,3 +1,4 @@
+import { AUTH_BASE_URL, EXPENSE_BASE_URL } from "../config/api";
 import { useState, useEffect} from "react";
 import "../css/SignupComponent.css";
 import axios from "axios";
@@ -36,7 +37,7 @@ function SignupComponent() {
   useEffect(() => {
     // Replace with your real API
     const allExpenseResponse = axios.get(
-      "http://localhost:8081/availableexpense",
+      `${EXPENSE_BASE_URL}/availableexpense`,
     );
     setAllExpense(allExpenseResponse.data);
     const fetchExpenses = async () => {
@@ -97,7 +98,7 @@ function SignupComponent() {
       !errorEmailAddress
     ) {
       await axios
-        .post("http://localhost:8080/auth/signup", {
+        .post(`${AUTH_BASE_URL}/auth/signup`, {
           firstName: firstName,
           lastName: secondName,
           emailAddress: emailAddress,

@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
@@ -17,7 +18,7 @@ const ReportPopup = ({ show, handleClose }) => {
     if (!selectedYear) return;
     setErrorMsg(null);
     try {
-      const response = await axiosInstance.post("http://localhost:8081/expenseanalyzer", {
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/expenseanalyzer`, {
         year: selectedYear,
       });
 

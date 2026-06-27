@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState, useEffect, useCallback } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import {
@@ -63,7 +64,7 @@ const Module2 = () => {
   const fetchPieMonth = useCallback(async () => {
     setLoadingPieMonth(true);
     try {
-      const response = await axiosInstance.get("http://localhost:8081/piechartbymonth", {
+      const response = await axiosInstance.get(`${EXPENSE_BASE_URL}/piechartbymonth`, {
         params: { monthName: pieMonthMonth, year: pieMonthYear },
       });
       setPieMonthData(mapToChartData(response.data));
@@ -77,7 +78,7 @@ const Module2 = () => {
   const fetchPieYear = useCallback(async () => {
     setLoadingPieYear(true);
     try {
-      const res = await axiosInstance.get("http://localhost:8081/piechartbyyear", {
+      const res = await axiosInstance.get(`${EXPENSE_BASE_URL}/piechartbyyear`, {
         params: { year: pieYearFilter },
       });
       setPieYearData(mapToChartData(res.data));
@@ -91,7 +92,7 @@ const Module2 = () => {
   const fetchBarMonth = useCallback(async () => {
     setLoadingBarMonth(true);
     try {
-      const res = await axiosInstance.get("http://localhost:8081/bargraphbymonth", {
+      const res = await axiosInstance.get(`${EXPENSE_BASE_URL}/bargraphbymonth`, {
         params: { monthName: barMonthMonth, year: barMonthYear },
       });
       setBarMonthData(mapToBarData(res.data));
@@ -105,7 +106,7 @@ const Module2 = () => {
   const fetchBarYear = useCallback(async () => {
     setLoadingBarYear(true);
     try {
-      const res = await axiosInstance.get("http://localhost:8081/bargraphbyyear", {
+      const res = await axiosInstance.get(`${EXPENSE_BASE_URL}/bargraphbyyear`, {
         params: { year: barYearFilter },
       });
       setBarYearData(mapToBarData(res.data));
@@ -123,7 +124,7 @@ const Module2 = () => {
 
   const downloadYearExcel = async () => {
     try {
-      const response = await axiosInstance.post("http://localhost:8081/yearexpenseexcel", {
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/yearexpenseexcel`, {
         year: selectedYear,
       }, { responseType: "blob" });
       if (response.status === 200) {
@@ -144,7 +145,7 @@ const Module2 = () => {
 
   const downloadMonthExcel = async (month, year) => {
     try {
-      const response = await axiosInstance.post("http://localhost:8081/monthexpenseexcel", {
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/monthexpenseexcel`, {
         year,
         month,
       }, { responseType: "blob" });

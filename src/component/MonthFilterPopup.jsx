@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../css/MonthFilterPopup.css";
@@ -35,7 +36,7 @@ const MonthFilterPopup = ({ show, handleClose }) => {
     setErrorMsg(null);
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/userexpensebymonth",
+        `${EXPENSE_BASE_URL}/userexpensebymonth`,
         {
           monthName: selectedMonth,
           year: selectedYear,

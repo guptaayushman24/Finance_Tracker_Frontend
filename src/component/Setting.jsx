@@ -1,3 +1,4 @@
+import { AUTH_BASE_URL, EXPENSE_BASE_URL } from "../config/api";
 import { FaCog, FaWallet, FaMobileAlt, FaMoneyBillWave, FaCalendarDay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Offcanvas, Button, Form } from "react-bootstrap";
@@ -28,7 +29,7 @@ const ModuleHeader = () => {
 
   const allAvailableExpense = async () => {
     try {
-      const response = await axiosInstance.get("http://localhost:8081/availableexpense");
+      const response = await axiosInstance.get(`${EXPENSE_BASE_URL}/availableexpense`);
       if (response.status == 200) {
         setAllExpense(response.data);
       }
@@ -40,7 +41,7 @@ const ModuleHeader = () => {
 
   const userExpense = async() =>{
     try{
-      const response = await axiosInstance.get("http://localhost:8080/auth/registeredexpensebyuser");
+      const response = await axiosInstance.get(`${AUTH_BASE_URL}/auth/registeredexpensebyuser`);
     
     if (response.status==200){
       setUserRegisteredExpense(response.data);
@@ -53,7 +54,7 @@ const ModuleHeader = () => {
 
   const addNewExpenseCategory = async () =>{
     try{
-      const response = await axiosInstance.post("http://localhost:8081/addnewexpense",{
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/addnewexpense`,{
          newUserExpense:newExpenseCategory
       })
       if (response.status==200){
@@ -68,7 +69,7 @@ const ModuleHeader = () => {
 
   const deleteUserExpenseCategory = async() => {
     try{
-      const response = await axiosInstance.post("http://localhost:8081/deleteexpense",{
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/deleteexpense`,{
         expenseTobeDeleted:deleteExpenseCategory
       })
       if (response.status==200){
@@ -82,7 +83,7 @@ const ModuleHeader = () => {
 
   const deleteScheduler = async() => {
     try{
-      const response = await axiosInstance.post("http://localhost:8081/deletescheduler")
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/deletescheduler`)
       if (response.status==200){
         alert(response.data?.message || "Scheduler removed successfully");
       }
@@ -95,7 +96,7 @@ const ModuleHeader = () => {
 
   const todayExpense = async()=>{
     try{
-      const response = await axiosInstance.get("http://localhost:8081/totalexpennseoncurrentdate")
+      const response = await axiosInstance.get(`${EXPENSE_BASE_URL}/totalexpennseoncurrentdate`)
       if (response.status==200){
           console.log("Response is",response.data);
           dispatch(setTotalExpenseToady(response.data.sum));
@@ -106,7 +107,7 @@ const ModuleHeader = () => {
     }
 
     try{
-      const response = await axiosInstance.post("http://localhost:8081/totalexpennseoncurrentdatepaymentmode",{
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/totalexpennseoncurrentdatepaymentmode`,{
         "paymentMode":"UPI"
       })
       if (response.status==200){
@@ -119,7 +120,7 @@ const ModuleHeader = () => {
     }
 
     try{
-      const response = await axiosInstance.post("http://localhost:8081/totalexpennseoncurrentdatepaymentmode",{
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/totalexpennseoncurrentdatepaymentmode`,{
         "paymentMode":"CASH"
       })
       if (response.status==200){

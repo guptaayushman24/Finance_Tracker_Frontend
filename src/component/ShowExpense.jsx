@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import axiosInstance from "../util/AxiosInstance";
@@ -7,7 +8,7 @@ function ShowExpense (props){
   const deleteUserExpense = async (id) => {
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/deleteuserexpense",
+        `${EXPENSE_BASE_URL}/deleteuserexpense`,
         { id }
       );
       if (response.status === 200) {

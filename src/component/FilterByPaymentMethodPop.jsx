@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axiosInstance from "../util/AxiosInstance";
@@ -24,7 +25,7 @@ const PaymentModePopup = ({ show, handleClose }) => {
       // CALL the CASH
       setPaymentMode("CASH");
     }
-    const response = await axiosInstance.post("http://localhost:8081/filterbypaymentmode",{
+    const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/filterbypaymentmode`,{
            paymentMode:paymentMode
         })
         if (response.status===200){

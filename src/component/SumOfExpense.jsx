@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "../css/SumOfExpense.css";
@@ -121,7 +122,7 @@ function SumOfExpense() {
   async function getSelectedYearExpense(year) {
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebyyear",
+        `${EXPENSE_BASE_URL}/totalexpensebyyear`,
         {
           year: year,
         },
@@ -140,7 +141,7 @@ function SumOfExpense() {
     setYearExpenseByPaymentMode(null); // clear stale value immediately
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebyyearpaymentmode",
+        `${EXPENSE_BASE_URL}/totalexpensebyyearpaymentmode`,
         { paymentMode, year },
       );
       if (response.status == 200) {
@@ -157,7 +158,7 @@ function SumOfExpense() {
   async function getMonthExpenseByMode(monthName, mode, year) {
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebymonthpaymentmode",
+        `${EXPENSE_BASE_URL}/totalexpensebymonthpaymentmode`,
         { month: monthName, paymentMode: mode, year },
       );
       if (response.status == 200) {
@@ -173,7 +174,7 @@ function SumOfExpense() {
       console.log("Month Name is",monthName);
       console.log("Year is",year);
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebymonth",
+        `${EXPENSE_BASE_URL}/totalexpensebymonth`,
         {
           month: monthName,
           year: year,

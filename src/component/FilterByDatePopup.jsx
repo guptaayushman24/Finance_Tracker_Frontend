@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../css/FilterByDatePopup.css";
@@ -16,7 +17,7 @@ const FilterByDatePopup = ({ show, handleClose, onApply }) => {
 
    const handleApply = async() => {
     try{
-      const response = await axiosInstance.post("http://localhost:8081/expenseOnday",{
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/expenseOnday`,{
         localDate:fromDate,
         paymentMode:paymentMode===null? "" :paymentMode
       })

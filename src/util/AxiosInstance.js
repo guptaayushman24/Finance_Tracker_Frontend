@@ -1,7 +1,8 @@
 import axios from "axios";
+import { AUTH_BASE_URL } from "../config/api";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/auth/signin", // your backend base URL
+  baseURL: `${AUTH_BASE_URL}/auth/signin`,
 });
 
 axiosInstance.interceptors.request.use(

@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../css/SchedulerPopup.css";
@@ -42,7 +43,7 @@ const SchedulerPopup = ({ show, handleClose }) => {
         schedule = 3;
       }
       const response = await axiosInstance.post(
-        "http://localhost:8081/registerscheduler",
+        `${EXPENSE_BASE_URL}/registerscheduler`,
         {
           schedulerTimming: schedule,
         }

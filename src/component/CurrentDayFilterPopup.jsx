@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../css/CurrentDayFilterPopup.css";
@@ -27,7 +28,7 @@ const CurrentDayFilterPopup = ({ show, handleClose }) => {
     try {
       // TODO: Replace with your actual API endpoint and payload shape
       const response = await axiosInstance.post(
-        "http://localhost:8081/toalexpenseondate",
+        `${EXPENSE_BASE_URL}/toalexpenseondate`,
         {
           expenseDate: selectedDate,
           paymentMode: selectedMethod,

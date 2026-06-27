@@ -1,3 +1,4 @@
+import { AUTH_BASE_URL } from "../config/api";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/SigninComponent.css";
@@ -57,7 +58,7 @@ function SigninComponent() {
       
       try {
         const response = await axios.post(
-          "http://localhost:8080/auth/signin",
+          `${AUTH_BASE_URL}/auth/signin`,
           {
             email: emailAddress,
             password: password,
@@ -75,7 +76,7 @@ function SigninComponent() {
       try {
         const token = localStorage.getItem("token");
         const response = await axiosInstance.post(
-          "http://localhost:8080/auth/profile",
+          `${AUTH_BASE_URL}/auth/profile`,
           {
             emailAddress: emailAddress,
           },

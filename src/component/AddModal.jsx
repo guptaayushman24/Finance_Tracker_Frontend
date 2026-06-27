@@ -1,3 +1,4 @@
+import { AUTH_BASE_URL, EXPENSE_BASE_URL } from "../config/api";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import {
   FaMoneyBillWave,
@@ -33,7 +34,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
     setLoadingSaveExpense(true);
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/userexpense",
+        `${EXPENSE_BASE_URL}/userexpense`,
         {
           expenseType: userregisterexpense,
           value: parseInt(amoumt),
@@ -54,7 +55,7 @@ const AddExpenseModal = ({ show, handleClose }) => {
 
   const showUserExpense = async () => {
     const response = await axiosInstance.get(
-      "http://localhost:8080/auth/registeredexpensebyuser",
+      `${AUTH_BASE_URL}/auth/registeredexpensebyuser`,
     );
     if (response.status == 200) {
       setUserRegisteredExpense(response.data);

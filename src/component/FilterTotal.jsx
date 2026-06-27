@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import { FaFilter, FaCreditCard, FaCalculator, FaSortAmountDown, FaCalendarAlt } from "react-icons/fa";
@@ -40,7 +41,7 @@ function FilterTotal() {
     setShowSumOfExpense(true);
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebyyear",
+        `${EXPENSE_BASE_URL}/totalexpensebyyear`,
         {
           year: currentDate.getFullYear(),
         },
@@ -55,7 +56,7 @@ function FilterTotal() {
 
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/totalexpensebyyearpaymentmode",
+        `${EXPENSE_BASE_URL}/totalexpensebyyearpaymentmode`,
         {
           paymentMode: "UPI",
           year: currentDate.getFullYear(),
@@ -75,7 +76,7 @@ function FilterTotal() {
     }
 
     try{
-      const response = await axiosInstance.post("http://localhost:8081/totalexpensebymonth",{
+      const response = await axiosInstance.post(`${EXPENSE_BASE_URL}/totalexpensebymonth`,{
         month:currentDate.toLocaleString("en-US", { month: "long" }),
         year:currentDate.getFullYear()
       })

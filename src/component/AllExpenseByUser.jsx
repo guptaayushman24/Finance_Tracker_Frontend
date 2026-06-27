@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 import { FaTable, FaCalendarDay, FaCalendarAlt, FaCalendar } from "react-icons/fa";
@@ -45,7 +46,7 @@ const AllExpenseByUser = () => {
   const fetchAllUserExpense = async () => {
     try {
       const response = await axiosInstance.get(
-        "http://localhost:8081/allexpense",
+        `${EXPENSE_BASE_URL}/allexpense`,
       );
       if (response.status === 200) {
         console.table(response.data);

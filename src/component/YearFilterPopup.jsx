@@ -1,3 +1,4 @@
+import { EXPENSE_BASE_URL } from "../config/api";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../css/YearFilterPopup.css";
@@ -20,7 +21,7 @@ const YearFilterPopup = ({ show, handleClose }) => {
     setErrorMsg(null);
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8081/userexpensebyyear",
+        `${EXPENSE_BASE_URL}/userexpensebyyear`,
         {
           year: selectedYear,
         },
