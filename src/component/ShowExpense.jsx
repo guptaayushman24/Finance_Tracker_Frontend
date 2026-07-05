@@ -14,7 +14,7 @@ function ShowExpense (props){
       if (response.status === 200) {
         alert("Expense of user deleted successfuly");
         // refresh the list after deletion
-        // fetchAllUserExpense();
+        fetchAllUserExpense();
       }
     } catch (error) {
       console.error("Error in deleting data", error);
@@ -42,7 +42,7 @@ function ShowExpense (props){
             {allUserExpense && allUserExpense.length > 0 &&
               (skipReverse ? [...allUserExpense] : [...allUserExpense].reverse())
                 .map((value, index) => (
-                  <tr key={index}>
+                  <tr key={value.id ?? index}>
                     <td>{value.expenseType}</td>
                     <td>{value.description}</td>
                     <td>{value.value}</td>
