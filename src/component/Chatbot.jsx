@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiMessageSquare, FiX, FiSend } from "react-icons/fi";
 import axiosInstance from "../util/AxiosInstance";
+import { CHATBOT_BASE_URL } from "../config/api";
 import "../css/Chatbot.css";
 
 // ─── Replace this function with your real API call ───────────────────────────
 async function sendMessage(userText) {
-  const response = await axiosInstance.post("http://localhost:8084/chatbot/query", {
+  const response = await axiosInstance.post(`${CHATBOT_BASE_URL}/chatbot/query`, {
     query: userText,
   });
   return response.data;          // adjust to your response shape
